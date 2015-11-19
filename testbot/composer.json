@@ -1,5 +1,5 @@
 {
-  "require-dev": {
-    "heroku/heroku-buildpack-php": "*"
-  }
+    "require": {
+        "monolog/monolog": "1.0.*"
+    }
 }
