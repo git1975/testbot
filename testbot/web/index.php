@@ -1,6 +1,6 @@
 <?php
 
-define('BOT_TOKEN', '148713043:AAEb7CdO-XXnEzM7nlZVHn4wSixatlQ45DI');
+define('BOT_TOKEN', 'XX');
 define('API_URL', 'https://api.telegram.org/bot'.BOT_TOKEN.'/');
 
 function apiRequestWebhook($method, $parameters) {
@@ -139,7 +139,7 @@ function processMessage($message) {
 }
 
 
-define('WEBHOOK_URL', 'http://dztestbot.herokuapp.com/web/');
+define('WEBHOOK_URL', 'https://dztestbot.herokuapp.com/web/index.php');
 
 if (php_sapi_name() == 'cli') {
   // if run from console, set or delete webhook
