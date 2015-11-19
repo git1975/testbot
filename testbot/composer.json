@@ -1,0 +1,10 @@
+{
+    "name": "testbot",
+    "description": "testbot",
+    "keywords": ["testbot"],
+    "authors": [
+        {
+            "name": "Denis Zorin",
+        }
+    ]
+}
