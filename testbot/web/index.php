@@ -138,6 +138,7 @@ function processMessage($message) {
   }
 }
 
+echo "php_sapi_name=" . php_sapi_name();
 
 define('WEBHOOK_URL', 'https://dztestbot.herokuapp.com/web/index.php');
 
