@@ -138,6 +138,7 @@ function processMessage($message) {
   }
 }
 
+error_log("---->>>>BEGIN\n");
 
 define('WEBHOOK_URL', 'https://dztestbot.herokuapp.com/web/index.php');
 
