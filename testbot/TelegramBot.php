@@ -34,7 +34,7 @@ abstract class TelegramBotCore {
     $this->handle = curl_init();
     $response = $this->request('getMe');
     if (!$response['ok']) {
-      throw new Exception("Can't connect to server");
+      throw new Exception("Can't connect to server: {$response}");
     }
     $bot = $response['result'];
     $this->botId = $bot['id'];
