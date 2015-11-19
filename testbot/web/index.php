@@ -128,6 +128,8 @@ function processMessage($message) {
         'resize_keyboard' => true)));
     } else if ($text === "Hello" || $text === "Hi") {
       apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => 'Nice to meet you'));
+    } else if ($text === "By") {
+      apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => 'By-by!'));
     } else if (strpos($text, "/stop") === 0) {
       // stop now
     } else {
