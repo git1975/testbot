@@ -141,7 +141,7 @@ function processMessage($message) {
   }
 }
 
-define('WEBHOOK_URL', 'https://dztestbot.herokuapp.com/web/index.php');
+define('WEBHOOK_URL', 'https://alfaprofitbot.herokuapp.com/web/index.php');
 
 if (php_sapi_name() == 'cli') {
   // if run from console, set or delete webhook
