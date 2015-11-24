@@ -123,26 +123,26 @@ function processMessage($message) {
     $text = $message['text'];
 
     if (strpos($text, "/start") === 0) {
-      apiRequestJson("sendMessage", array('chat_id' => $chat_id, "text" => 'Hi', 'reply_markup' => array(
-        'keyboard' => array(array('Hi', 'Hi')),
+      apiRequestJson("sendMessage", array('chat_id' => $chat_id, "text" => 'РџСЂРёРІРµС‚', 'reply_markup' => array(
+        'keyboard' => array(array('РџСЂРёРІРµС‚', 'РџРѕРєР°')),
         'one_time_keyboard' => true,
         'resize_keyboard' => true)));
     } else if (strpos($text, "?") === 0) {
-    	apiRequestJson("sendMessage", array('chat_id' => $chat_id, "text" => 'Привет', 'reply_markup' => array(
-    			'keyboard' => array(array('Привет', 'Hi')),
+    	apiRequestJson("sendMessage", array('chat_id' => $chat_id, "text" => 'РџСЂРёРІРµС‚', 'reply_markup' => array(
+    			'keyboard' => array(array('РџСЂРёРІРµС‚', 'Hi')),
     			'one_time_keyboard' => true,
     			'resize_keyboard' => true)));
-    } else if (strpos($text, "Привет") === 0) {
-      apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => 'Рад Вас видеть!'));
-    } else if ($text === "Пока") {
-      apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => 'Пока-пока!'));
+    } else if (strpos($text, "РџСЂРёРІРµС‚") === 0) {
+      apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => 'Р Р°Рґ Р’Р°СЃ РІРёРґРµС‚СЊ!'));
+    } else if ($text === "РџРѕРєР°") {
+      apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => 'РџРѕРєР°-РїРѕРєР°!'));
     } else if (strpos($text, "/stop") === 0) {
       // stop now
     } else {
       apiRequestWebhook("sendMessage", array('chat_id' => $chat_id, "reply_to_message_id" => $message_id, "text" => 'Cool'));
     }
   } else {
-    apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => 'Я понимаю только текст'));
+    apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => 'РЇ РїРѕРЅРёРјР°СЋ  С‚РѕР»СЊРєРѕ С‚РµРєСЃС‚'));
   }
 }
 
