@@ -124,9 +124,14 @@ function processMessage($message) {
 
     if (strpos($text, "/start") === 0) {
       apiRequestJson("sendMessage", array('chat_id' => $chat_id, "text" => 'Привет', 'reply_markup' => array(
-        'keyboard' => array(array('Hello', 'Hi')),
+        'keyboard' => array(array('Привет', 'Hi')),
         'one_time_keyboard' => true,
         'resize_keyboard' => true)));
+    } else if (strpos($text, "?") === 0) {
+    	apiRequestJson("sendMessage", array('chat_id' => $chat_id, "text" => 'Привет', 'reply_markup' => array(
+    			'keyboard' => array(array('Привет', 'Hi')),
+    			'one_time_keyboard' => true,
+    			'resize_keyboard' => true)));
     } else if (strpos($text, "Привет") === 0) {
       apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => 'Рад Вас видеть!'));
     } else if ($text === "Пока") {
