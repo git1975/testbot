@@ -136,6 +136,11 @@ function processMessage($message) {
       apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => 'Рад Вас видеть!'));
     } else if ($text === "Пока") {
       apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => 'Пока-пока!'));
+    } else if (strpos(strtolower($text), "услуги") >= 0) {
+      apiRequestJson("sendMessage", array('chat_id' => $chat_id, "text" => 'Легко', 'reply_markup' => array(
+        'keyboard' => array(array('Кредит', 'Депозит')),
+        'one_time_keyboard' => true,
+        'resize_keyboard' => true)));
     } else if (strpos($text, "/stop") === 0) {
       // stop now
     } else {
