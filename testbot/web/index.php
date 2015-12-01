@@ -147,7 +147,7 @@ function processMessage($message) {
       apiRequestWebhook("sendMessage", array('chat_id' => $chat_id, "reply_to_message_id" => $message_id, "text" => 'Cool'));
     }
   } else {
-    apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => 'Я понимаю  только текст'));
+    apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => 'Я понимаю  только текст1'));
   }
 }
 
