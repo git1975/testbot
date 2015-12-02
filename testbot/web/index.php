@@ -145,7 +145,7 @@ function processMessage($message) {
     	apiRequestJson("sendMessage", array('chat_id' => $chat_id, "text" => 'Легко!', 'reply_markup' => array(
         'keyboard' => array(array('Привязать карту', 'Помощь', 'Взять в долг', 'Дать в долг')),	
         'one_time_keyboard' => true,
-        'resize_keyboard' => true)));
+        'resize_keyboard' => false)));
     } else if (strpos($text, "/stop") === 0) {
       // stop now
     } else {
