@@ -151,20 +151,6 @@ function processMessage($message) {
   }
 }
 
-function push() {
-	// аналог пуш-уведомлений
-	// использовать можно как нотификация пользователей, 
-	// периодические напоминания, либо показ первоначального экрана при запуске бота
-	// т.е. тогда, когда нет изначального сообщения от пользователя
-	
-
-      apiRequestJson("sendMessage", array('chat_id' => $chat_id, "text" => 'Легко!', 'reply_markup' => array(
-        'keyboard' => array(array('Привязать карту', 'Помощь', 'Взять в долг', 'Дать в долг')),	
-        'one_time_keyboard' => true,
-        'resize_keyboard' => true)));
-	 
-}
-
 define('WEBHOOK_URL', 'https://alfaprofitbot.herokuapp.com/web/index.php');
 
 //if (php_sapi_name() == 'cli') {
@@ -184,5 +170,3 @@ if (!$update) {
 if (isset($update["message"])) {
   processMessage($update["message"]);
 }
-
-push(); // при запуске бота 
