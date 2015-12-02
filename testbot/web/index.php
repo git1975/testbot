@@ -141,6 +141,11 @@ function processMessage($message) {
         'keyboard' => array(array('Кредит', 'Депозит')),
         'one_time_keyboard' => true,
         'resize_keyboard' => true)));
+    } else if ($text === 'develop') {
+    	apiRequestJson("sendMessage", array('chat_id' => $chat_id, "text" => 'Легко!', 'reply_markup' => array(
+        'keyboard' => array(array('Привязать карту', 'Помощь', 'Взять в долг', 'Дать в долг')),	
+        'one_time_keyboard' => true,
+        'resize_keyboard' => true)));
     } else if (strpos($text, "/stop") === 0) {
       // stop now
     } else {
