@@ -134,6 +134,7 @@ function processMessage($message)
     if (isset($message['text'])) {
         // incoming text message
         $text = $message['text'];
+        error_log("chat_id: $chat_id");
         error_log("INCOMING MESSAGE: $text");
 
 
