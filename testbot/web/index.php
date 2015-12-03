@@ -148,6 +148,7 @@ function processMessage($message)
                         'resize_keyboard' => true
                     ]
                 ]);
+            error_log("KEYBOARD: $keyboards->keyboard_start");
         } else if (strcasecmp($text, "lendscreen") === 0) {
             apiRequestJson("sendMessage",
                 [
