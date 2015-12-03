@@ -1,4 +1,11 @@
 <?php
+/*
+require_once 'keyboard_borrow.php';
+require_once 'keyboard_lend.php';
+require_once 'keyboard_lend_borrow.php';
+require_once 'keyboard_start.php';
+*/
+require_once 'Keyboards.php';
 
 //define('BOT_TOKEN', '148713043:AAEb7CdO-XXnEzM7nlZVHn4wSixatlQ45DI');
 define('BOT_TOKEN', '172422666:AAEy8f1P2sSigKdE-RqSE7jxC7LYI4cACQ8');
@@ -116,6 +123,8 @@ function apiRequestJson($method, $parameters) {
 
 function processMessage($message) {
   // process incoming message
+    //
+    $keyboards = new Keyboards;
   $message_id = $message['message_id'];
   $chat_id = $message['chat']['id'];
   if (isset($message['text'])) {
@@ -142,18 +151,16 @@ function processMessage($message) {
         'one_time_keyboard' => true,
         'resize_keyboard' => true)));
     } else if ($text === 'develop') {
-    	$keyboard = [
-    		['Привязать карту', 'Помощь'],
-    		['Взять в долг', 'Дать в долг']
-    	]; 
     	apiRequestJson("sendMessage", 
-    	array(
-    	'chat_id' => $chat_id,
-    	"text" => 'Легко!',
-    	'reply_markup' => array(
-        'keyboard' => $keyboard,	
-        'one_time_keyboard' => true,
-        'resize_keyboard' => false)));
+    	[
+            'chat_id' => $chat_id,
+            "text" => 'Легко!',
+            'reply_markup' => [
+                'keyboard' => $keyboards -> keyboard_start,
+                'one_time_keyboard' => true,
+                'resize_keyboard' => false
+            ]
+        ]);
     } else if (strpos($text, "/stop") === 0) {
       // stop now
     } else {
@@ -170,11 +177,12 @@ function push() {
 	// периодические напоминания, либо показ первоначального экрана при запуске бота
 	// т.е. тогда, когда нет изначального сообщения от пользователя
 	
-
+/*
       apiRequestJson("sendMessage", array('chat_id' => $chat_id, "text" => 'Легко!', 'reply_markup' => array(
         'keyboard' => array(array('Привязать карту', 'Помощь', 'Взять в долг', 'Дать в долг')),	
         'one_time_keyboard' => true,
         'resize_keyboard' => true)));
+	*/
 	 
 }
 
