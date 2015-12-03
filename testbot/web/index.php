@@ -154,11 +154,11 @@ function processMessage($message) {
     	apiRequestJson("sendMessage", 
     	[
             'chat_id' => $chat_id,
-            "text" => 'Легко!',
+            "text" => 'Легко2!',
             'reply_markup' => [
                 'keyboard' => $keyboards -> keyboard_start,
                 'one_time_keyboard' => true,
-                'resize_keyboard' => false
+                'resize_keyboard' => true
             ]
         ]);
     } else if (strpos($text, "/stop") === 0) {
