@@ -1,11 +1,11 @@
 <?php
-/*
-require_once 'keyboard_borrow.php';
-require_once 'keyboard_lend.php';
-require_once 'keyboard_lend_borrow.php';
-require_once 'keyboard_start.php';
-*/
+
 require_once 'Keyboards.php';
+require_once 'MessagesStart.php';
+require_once 'MessagesBorrow.php';
+require_once 'MessagesLend.php';
+
+
 
 //define('BOT_TOKEN', '148713043:AAEb7CdO-XXnEzM7nlZVHn4wSixatlQ45DI');
 define('BOT_TOKEN', '172422666:AAEy8f1P2sSigKdE-RqSE7jxC7LYI4cACQ8');
@@ -129,8 +129,13 @@ function processMessage($message)
 {
 
     $keyboards = new Keyboards;
+    $msgStart = new MessagesStart;
+    $msgBorrow = new MessagesBorrow;
+    $msgLend = new MessagesLend;
+
     $message_id = $message['message_id'];
     $chat_id = $message['chat']['id'];
+
     if (isset($message['text'])) {
         // incoming text message
         $text = $message['text'];
@@ -142,21 +147,18 @@ function processMessage($message)
             apiRequestJson("sendMessage",
                 [
                     'chat_id' => $chat_id,
-                    'text' => 'Keyboard testing. start keyboard',
                     'reply_markup' => [
-                        'keyboard' => $keyboards->keyboard_start,
+                        'keyboard' => $keyboards->keyboardStart,
                         'one_time_keyboard' => true,
                         'resize_keyboard' => true
                     ]
                 ]);
-            error_log("KEYBOARD: ".implode($keyboards->keyboard_start));
         } else if (strcasecmp($text, "lendscreen") === 0) {
             apiRequestJson("sendMessage",
                 [
                     'chat_id' => $chat_id,
-                    'text' => 'Keyboard testing. Lend keyboard',
                     'reply_markup' => [
-                        'keyboard' => $keyboards->keyboard_lend,
+                        'keyboard' => $keyboards->keyboardLend,
                         'one_time_keyboard' => true,
                         'resize_keyboard' => true
                     ]
@@ -165,9 +167,8 @@ function processMessage($message)
             apiRequestJson("sendMessage",
                 [
                     'chat_id' => $chat_id,
-                    'text' => 'Keyboard testing. Borrow keyboard',
                     'reply_markup' => [
-                        'keyboard' => $keyboards->keyboard_borrow,
+                        'keyboard' => $keyboards->keyboardBorrow,
                         'one_time_keyboard' => true,
                         'resize_keyboard' => true
                     ]
@@ -193,13 +194,9 @@ function processMessage($message)
                 ]);
         }
     }
-
-
-
 }
 
-function push()
-{
+function push() {
     // аналог пуш-уведомлений
     // использовать можно как нотификация пользователей,
     // периодические напоминания, либо показ первоначального экрана при запуске бота
@@ -211,8 +208,17 @@ function push()
             'one_time_keyboard' => true,
             'resize_keyboard' => true)));
         */
+    apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => 'Ок, я запомнил!'));
 
 }
+
+function showHelloMessage()
+{
+    apiRequest("sendMessage", [
+        'chat_id' => $ch
+    ]);
+}
+
 
 define('WEBHOOK_URL', 'https://alfaprofitbot.herokuapp.com/web/index.php');
 
