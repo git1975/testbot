@@ -127,7 +127,7 @@ function apiRequestJson($method, $parameters)
 
 function processMessage($message)
 {
-    /*
+
     $keyboards = new Keyboards;
     $message_id = $message['message_id'];
     $chat_id = $message['chat']['id'];
@@ -179,42 +179,9 @@ function processMessage($message)
                 ]);
         }
     }
-    */
 
-    // process incoming message
-    $message_id = $message['message_id'];
-    $chat_id = $message['chat']['id'];
-    if (isset($message['text'])) {
-        // incoming text message
-        $text = $message['text'];
 
-        if (strpos($text, "/start") === 0) {
-            apiRequestJson("sendMessage", array('chat_id' => $chat_id, "text" => 'Привет', 'reply_markup' => array(
-                'keyboard' => array(array('Привет', 'Пока')),
-                'one_time_keyboard' => true,
-                'resize_keyboard' => true)));
-        } else if (strpos($text, "?") === 0) {
-            apiRequestJson("sendMessage", array('chat_id' => $chat_id, "text" => 'Привет', 'reply_markup' => array(
-                'keyboard' => array(array('Привет', 'Hi')),
-                'one_time_keyboard' => true,
-                'resize_keyboard' => true)));
-        } else if (strpos($text, "Привет") === 0) {
-            apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => 'Рад Вас видеть!'));
-        } else if ($text === "Пока") {
-            apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => 'Пока-пока!'));
-        } else if (strpos(strtolower($text), "услуги") !== false) {
-            apiRequestJson("sendMessage", array('chat_id' => $chat_id, "text" => 'Легко!', 'reply_markup' => array(
-                'keyboard' => array(array('Кредит', 'Депозит')),
-                'one_time_keyboard' => true,
-                'resize_keyboard' => true)));
-        } else if (strpos($text, "/stop") === 0) {
-            // stop now
-        } else {
-            apiRequestWebhook("sendMessage", array('chat_id' => $chat_id, "reply_to_message_id" => $message_id, "text" => 'Cool'));
-        }
-    } else {
-        apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => 'Я понимаю  только текст'));
-    }
+
 }
 
 function push()
