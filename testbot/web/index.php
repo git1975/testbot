@@ -172,6 +172,18 @@ function processMessage($message)
                         'resize_keyboard' => true
                     ]
                 ]);
+        } else if (strcasecmp($text, "Я инвестор") === 0) {
+        	$file = 'user1.txt';
+        	file_put_contents($file, $chat_id);
+        	apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => 'Ок, я запомнил!'));
+        } else if (strcasecmp($text, "Я заемщик") === 0) {
+        		$file = 'user2.txt';
+        		file_put_contents($file, $chat_id);
+        		apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => 'Ок, я запомнил!'));
+        		
+        		$file = 'user1.txt';
+        		$current = file_get_contents($file);
+        		apiRequest("sendMessage", array('chat_id' => $current, "text" => 'Заемщик появился!'));
         } else {
             apiRequestWebhook("sendMessage",
                 [
