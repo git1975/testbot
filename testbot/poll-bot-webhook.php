@@ -1,5 +1,6 @@
 <?php
 require_once 'PollBot.php';
+error_log('poll-bot-webhook.php started');
 define('BOT_TOKEN', '148713043:AAEb7CdO-XXnEzM7nlZVHn4wSixatlQ45DI');
 define('BOT_WEBHOOK', 'https://dztestbot.herokuapp.com/poll-bot-webhook.php');
 $bot = new PollBot(BOT_TOKEN, 'PollBotChat');

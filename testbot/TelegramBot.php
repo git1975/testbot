@@ -1,5 +1,6 @@
 <?php
 abstract class TelegramBotCore {
+
   protected $host;
   protected $port;
   protected $apiUrl;
@@ -15,6 +16,7 @@ abstract class TelegramBotCore {
   protected $updatesTimeout = 10;
   protected $netTimeout = 10;
   protected $netConnectTimeout = 5;
+
   public function __construct($token, $options = array()) {
     $options += array(
       'host' => 'api.telegram.org',
@@ -27,6 +29,7 @@ abstract class TelegramBotCore {
     $port_part = ($port == 443 || $port == 80) ? '' : ':'.$port;
     $this->apiUrl = "{$proto_part}://{$host}{$port_part}/bot{$token}";
   }
+
   public function init() {
     if ($this->inited) {
       return true;
@@ -42,20 +45,24 @@ abstract class TelegramBotCore {
     $this->inited = true;
     return true;
   }
+
   public function runLongpoll() {
     $this->init();
     $this->longpoll();
   }
+
   public function setWebhook($url) {
     $this->init();
     $result = $this->request('setWebhook', array('url' => $url));
     return $result['ok'];
   }
+
   public function removeWebhook() {
     $this->init();
     $result = $this->request('setWebhook', array('url' => ''));
     return $result['ok'];
   }
+
   public function request($method, $params = array(), $options = array()) {
     $options += array(
       'http_method' => 'GET',
@@ -98,6 +105,7 @@ abstract class TelegramBotCore {
     $response = json_decode($response_str, true);
     return $response;
   }
+
   protected function longpoll() {
     $params = array(
       'limit' => $this->updatesLimit,
@@ -121,11 +129,16 @@ abstract class TelegramBotCore {
     }
     $this->longpoll();
   }
+
   abstract public function onUpdateReceived($update);
 }
+
+
+
 class TelegramBot extends TelegramBotCore {
   protected $chatClass;
   protected $chatInstances = array();
+
   public function __construct($token, $chat_class, $options = array()) {
     parent::__construct($token, $options);
     $instance = new $chat_class($this, 0);
@@ -134,6 +147,7 @@ class TelegramBot extends TelegramBotCore {
     }
     $this->chatClass = $chat_class;
   }
+
   public function onUpdateReceived($update) {
     if ($update['message']) {
       $message = $update['message'];
@@ -176,6 +190,7 @@ class TelegramBot extends TelegramBotCore {
       }
     }
   }
+
   protected function getChatInstance($chat_id) {
     if (!isset($this->chatInstances[$chat_id])) {
       $instance = new $this->chatClass($this, $chat_id);
@@ -185,6 +200,9 @@ class TelegramBot extends TelegramBotCore {
     return $this->chatInstances[$chat_id];
   }
 }
+
+
+
 abstract class TelegramBotChat {
   protected $core;
   protected $chatId;
@@ -202,6 +220,7 @@ abstract class TelegramBotChat {
   public function bot_kicked_from_chat($message) {}
   public function some_command($command, $params, $message) {}
   public function message($text, $message) {}
+
   protected function apiSendMessage($text, $params = array()) {
     $params += array(
       'chat_id' => $this->chatId,

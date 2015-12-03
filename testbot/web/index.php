@@ -5,14 +5,13 @@ require_once 'MessagesStart.php';
 require_once 'MessagesBorrow.php';
 require_once 'MessagesLend.php';
 
-
+error_log('index.php started');
 
 //define('BOT_TOKEN', '148713043:AAEb7CdO-XXnEzM7nlZVHn4wSixatlQ45DI');
 define('BOT_TOKEN', '172422666:AAEy8f1P2sSigKdE-RqSE7jxC7LYI4cACQ8');
 define('API_URL', 'https://api.telegram.org/bot' . BOT_TOKEN . '/');
 
-function apiRequestWebhook($method, $parameters)
-{
+function apiRequestWebhook($method, $parameters) {
     if (!is_string($method)) {
         error_log("Method name must be a string\n");
         return false;
@@ -32,8 +31,7 @@ function apiRequestWebhook($method, $parameters)
     return true;
 }
 
-function exec_curl_request($handle)
-{
+function exec_curl_request($handle) {
     $response = curl_exec($handle);
 
     if ($response === false) {
@@ -69,8 +67,7 @@ function exec_curl_request($handle)
     return $response;
 }
 
-function apiRequest($method, $parameters)
-{
+function apiRequest($method, $parameters) {
     if (!is_string($method)) {
         error_log("Method name must be a string\n");
         return false;
@@ -99,8 +96,7 @@ function apiRequest($method, $parameters)
     return exec_curl_request($handle);
 }
 
-function apiRequestJson($method, $parameters)
-{
+function apiRequestJson($method, $parameters) {
     if (!is_string($method)) {
         error_log("Method name must be a string\n");
         return false;
@@ -125,8 +121,7 @@ function apiRequestJson($method, $parameters)
     return exec_curl_request($handle);
 }
 
-function processMessage($message)
-{
+function processMessage($message) {
 
     $keyboards = new Keyboards;
     $msgStart = new MessagesStart;
@@ -208,16 +203,10 @@ function push() {
             'one_time_keyboard' => true,
             'resize_keyboard' => true)));
         */
-    apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => 'Ок, я запомнил!'));
+    //apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => 'Ок, я запомнил!'));
 
 }
 
-function showHelloMessage()
-{
-    apiRequest("sendMessage", [
-        'chat_id' => $ch
-    ]);
-}
 
 
 define('WEBHOOK_URL', 'https://alfaprofitbot.herokuapp.com/web/index.php');
