@@ -142,8 +142,16 @@ function processMessage($message) {
         'one_time_keyboard' => true,
         'resize_keyboard' => true)));
     } else if ($text === 'develop') {
-    	apiRequestJson("sendMessage", array('chat_id' => $chat_id, "text" => 'Легко!', 'reply_markup' => array(
-        'keyboard' => array(array('Привязать карту', 'Помощь', 'Взять в долг', 'Дать в долг')),	
+    	$keyboard = [
+    		['Привязать карту', 'Помощь'],
+    		['Взять в долг', 'Дать в долг']
+    	]; 
+    	apiRequestJson("sendMessage", 
+    	array(
+    	'chat_id' => $chat_id,
+    	"text" => 'Легко!',
+    	'reply_markup' => array(
+        'keyboard' => $keyboard,	
         'one_time_keyboard' => true,
         'resize_keyboard' => false)));
     } else if (strpos($text, "/stop") === 0) {
@@ -190,4 +198,4 @@ if (isset($update["message"])) {
   processMessage($update["message"]);
 }
 
-push(); // при запуске бота 
+//push(); // при запуске бота 
