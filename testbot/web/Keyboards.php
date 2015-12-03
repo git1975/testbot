@@ -8,9 +8,13 @@
  */
 class Keyboards
 {
-    public $keyboard_start = ['Привязать карту', 'Помощь'];
+    public $keyboard_start = [
+        ['Привязать карту', 'Помощь']
+    ];
 
-    public $keyboard_lend_borrow = ['Взять в долг', 'Дать в долг'];
+    public $keyboard_lend_borrow = [
+        ['Взять в долг', 'Дать в долг']
+    ];
 
     public $keyboard_borrow = [
                 ['Запросить займ'],

@@ -141,7 +141,7 @@ function processMessage($message)
             apiRequestJson("sendMessage",
                 [
                     'chat_id' => $chat_id,
-                    'text' => 'Keyboard testing',
+                    'text' => 'Keyboard testing. start keyboard',
                     'reply_markup' => [
                         'keyboard' => $keyboards->keyboard_start,
                         'one_time_keyboard' => true,
@@ -153,7 +153,7 @@ function processMessage($message)
             apiRequestJson("sendMessage",
                 [
                     'chat_id' => $chat_id,
-                    'text' => 'Keyboard testing',
+                    'text' => 'Keyboard testing. Lend keyboard',
                     'reply_markup' => [
                         'keyboard' => $keyboards->keyboard_lend,
                         'one_time_keyboard' => true,
@@ -164,7 +164,7 @@ function processMessage($message)
             apiRequestJson("sendMessage",
                 [
                     'chat_id' => $chat_id,
-                    'text' => 'Keyboard testing',
+                    'text' => 'Keyboard testing. Borrow keyboard',
                     'reply_markup' => [
                         'keyboard' => $keyboards->keyboard_borrow,
                         'one_time_keyboard' => true,
