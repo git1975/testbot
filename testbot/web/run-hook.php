@@ -7,6 +7,7 @@ define('WEBHOOK_URL', 'https://alfaprofitbot.herokuapp.com/web/index.php');
   // if run from console, set or delete webhook
   error_log('run-hook.php started');
   apiRequest('setWebhook', array('url' => WEBHOOK_URL));
+  processMessage("startscreen");
 //  exit;
 //}
 echo "setWebhook OK";

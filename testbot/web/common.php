@@ -121,7 +121,7 @@ function apiRequestJson($method, $parameters) {
 
 function processMessage($message) {
 	//setlocale(LC_ALL, 'ru_RU.UTF-8');
-    error_log("Method processMessage. Input parameter message: ".implode($message));
+
 	
     $keyboards = new Keyboards;
     $msgStart = new MessagesStart;
@@ -139,7 +139,7 @@ function processMessage($message) {
         error_log("INCOMING MESSAGE: $text");
 
 
-        if (strcasecmp($text, "startscreen") === 0) {
+        if (strcasecmp($text, "start") === 0) {
             apiRequestJson("sendMessage",
                 [
                     'chat_id' => $chat_id,
@@ -150,7 +150,7 @@ function processMessage($message) {
                         'resize_keyboard' => true
                     ]
                 ]);
-        } else if (strcasecmp($text, "lendscreen") === 0) {
+        } else if (strcasecmp($text, "lend") === 0) {
             apiRequestJson("sendMessage",
                 [
                     'chat_id' => $chat_id,
@@ -161,7 +161,7 @@ function processMessage($message) {
                         'resize_keyboard' => true
                     ]
                 ]);
-        } else if (strcasecmp($text, "borrowscreen") === 0) {
+        } else if (strcasecmp($text, "borrow") === 0) {
             apiRequestJson("sendMessage",
                 [
                     'chat_id' => $chat_id,
@@ -172,7 +172,7 @@ function processMessage($message) {
                         'resize_keyboard' => true
                     ]
                 ]);
-        } else if (strcasecmp($text, "borrowlendscreen") === 0) {
+        } else if (strcasecmp($text, "borrowlend") === 0) {
             apiRequestJson("sendMessage",
                 [
                     'chat_id' => $chat_id,
@@ -227,5 +227,5 @@ function push() {
 
 }
 
-processMessage("startscreen");
+
 
