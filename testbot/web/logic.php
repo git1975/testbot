@@ -55,9 +55,7 @@ function processMessage($message) {
         	} else {
         		sendMsg($chat_id, "Код неверный");
         	}
-        }
-
-        else if(strpos($action, "action_borrow")  !== false){
+        } else if(strpos($action, "action_borrow")  !== false){
         	$handler = new HandlerBorrow();
         	$handler->handle($message);
         } else if(strpos($action, "action_lend") !== false){ 	
@@ -73,7 +71,7 @@ function processMessage($message) {
         
         if ($text === 'Назад' || $text === 'start') {
         	setAction($chat_id, "");
-        	sendStartScreen($chat_id, "");
+        	sendStartScreen($chat_id, "qqq");
         }
         
         // Root handler

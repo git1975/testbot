@@ -150,7 +150,7 @@ function getFileContent($chat_id, $name) {
 }
 
 function getFileContent2($name) {
-	$file = $name.".txt";
+	$file = "$name.txt";
 	$content = file_get_contents($file);
 	return $content;
 }
