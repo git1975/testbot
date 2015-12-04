@@ -92,6 +92,7 @@ class HandlerBorrow {
                 $str = $chat_id . ";" . $sum . ";" . $per . ";";
                 addFileContent ( "borrowers", $str );
                 
+                error_log("--->>>action_borrow_yesno lender: $lender $sum");
                 sendMsg($lender, "Заемщик списал сумму $sum");
 				sendKeyboard ( $chat_id, "Поздравляем! Вы успешно оформили займ.", $keyboards->keyboardBorrow );
 			} else if ($text == "Нет") {
