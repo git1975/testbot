@@ -14,8 +14,13 @@ class HandlerLend {
 			sendMsg ( $chat_id, "Напиши сумму инвестиций. Например, 5000" );
 			return;
 		} else if ($text == 'Назад') {
-			setAction ( $chat_id, "action_lend" );
-			sendKeyboard ( $chat_id, "Выберите действие", $keyboards->keyboardLend );
+			if($action == "action_lend"){
+				setAction ( $chat_id, "-" );
+				sendStartScreen($chat_id, "Start Screen");
+			} else {
+				setAction ( $chat_id, "action_lend" );
+				sendKeyboard ( $chat_id, "Выберите действие", $keyboards->keyboardLend );
+			}
 			return;
 		} else if ($text == 'Дать в долг') {
 			setAction ( $chat_id, "action_lend" );
