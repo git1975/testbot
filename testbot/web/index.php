@@ -1,5 +1,7 @@
 <?php
 
+require_once 'common.php';
+
 error_log('index.php started');
 
 $content = file_get_contents("php://input");
