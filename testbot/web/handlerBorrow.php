@@ -34,8 +34,8 @@ class HandlerBorrow {
 
 		if ($text === 'Инфо') {
             setAction ( $chat_id, "action_borrow_info" );
-            $this->sendAllMessages($msgs->infoMsg);
-            sendKeyboard($chat_id, $msgs->infoMsg, $keyboards->keyboardBorrow);
+            sendMsg($chat_id, $msgs->infoMsg[0]);
+            sendKeyboard($chat_id, $msgs->infoMsg[1], $keyboards->keyboardBorrow);
             return;
 		} else if ($text === 'Назад') {
             //setAction($chat_id, "borrow_go_back");
