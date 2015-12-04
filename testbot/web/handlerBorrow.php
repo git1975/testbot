@@ -45,6 +45,11 @@ class HandlerBorrow {
 
         if ($action == "action_borrow") {
 			if ($text == 'Запросить займ') {
+			    $lender = getFileContent2("lender");
+                if(trim($lender) === ""){
+                	sendKeyboard ( $chat_id, "Инвесторы не найдены", $keyboards->keyboardBorrow );
+                	return;
+                }
 				setAction ( $chat_id, "action_borrow_sum" );
 				sendMsg ( $chat_id, $msgs->loanInqMsg[0]);
 				sendKeyboard ( $chat_id, $msgs->loanInqMsg[1], $keyboards->keyboardBorrow );
@@ -82,7 +87,7 @@ class HandlerBorrow {
 			if ($text == "Да") {
 				setAction ( $chat_id, "action_borrow" );
                 $lender = getFileContent2("lender");
-                if($lender === "false"){
+                if(trim($lender) === ""){
                 	sendKeyboard ( $chat_id, "Инвесторы не найдены", $keyboards->keyboardYesNo );
                 	return;
                 }
