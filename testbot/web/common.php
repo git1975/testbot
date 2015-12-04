@@ -201,13 +201,13 @@ function processMessage($message) {
         
         if($action == "action_card_link"){
         	if(strlen($text) !== 16){
-        		apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => "Неверный формат номера карты"));
+        		send($chat_id, "Неверный формат номера карты");
         	} else {
         		setAction($chat_id, "action_card_commit");
                 $randomCode = rand(1000, 9999);
-                apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => "Подтвердите секретный код ".$randomCode));
         		setFileContent($chat_id, "code", $randomCode);
         		setFileContent($chat_id, "card_pre", $text);
+                send($chat_id, "Подтвердите секретный код ".$randomCode);
         	}
         } else if($action == "action_card_commit"){
         	$content = getFileContent($chat_id, "code");
