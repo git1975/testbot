@@ -121,7 +121,7 @@ function apiRequestJson($method, $parameters) {
 
 function processMessage($message) {
 	//setlocale(LC_ALL, 'ru_RU.UTF-8');
-    error_log("Method processMessage. Input parameter message: $message");
+    error_log("Method processMessage. Input parameter message: ".implode($message));
 	
     $keyboards = new Keyboards;
     $msgStart = new MessagesStart;
