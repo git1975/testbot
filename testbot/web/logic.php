@@ -175,12 +175,7 @@ function processMessage($message) {
         		apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => 'До свидания!'));
         		//++++++++==============
         } else {
-            apiRequestWebhook("sendMessage",
-                [
-                    'chat_id' => $chat_id,
-                    "reply_to_message_id" => $message_id,
-                    "text" => 'Cool'
-                ]);
+            sendMsg($chat_id, "Выберите действие");
         }
     }
 }
