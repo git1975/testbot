@@ -152,6 +152,9 @@ function getFileContent($chat_id, $name) {
 function getFileContent2($name) {
 	$file = "$name.txt";
 	$content = file_get_contents($file);
+	
+	error_log("--->>>getFileContent2: $file $content");
+	
 	return $content;
 }
 

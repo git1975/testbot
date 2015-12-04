@@ -16,6 +16,9 @@ class HandlerLend {
 		} else if ($text == 'Назад') {
 			setAction ( $chat_id, "action_lend" );
 			sendKeyboard ( $chat_id, "Выберите действие", $keyboards->keyboardLend );
+		} else if ($text == 'Дать в долг') {
+			setAction ( $chat_id, "action_lend" );
+			sendKeyboard ( $chat_id, "Выберите действие", $keyboards->keyboardLend );
 		} else if ($text == 'Инфо') {
 			setAction ( $chat_id, "action_lend_info" );
 			

@@ -33,8 +33,10 @@ class HandlerBorrow {
             sendMsg($chat_id, $msgs->infoMsg[0]);
             sendKeyboard($chat_id, $msgs->infoMsg[1], $keyboards->keyboardBorrow);
             return;
+        } else if ($text === 'Взять в долг') {
+        	sendKeyboard ( $chat_id, "Выберите действие", $keyboards->keyboardBorrow );
 		} else if ($text === 'Назад') {
-            sendStartScreen($chat_id, "Выберите действие");
+            sendKeyboard ( $chat_id, "Выберите действие", $keyboards->keyboardBorrow );
             return;
 		}
 		
