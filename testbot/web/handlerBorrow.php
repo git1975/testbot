@@ -34,8 +34,10 @@ class HandlerBorrow {
             sendKeyboard($chat_id, $msgs->infoMsg[1], $keyboards->keyboardBorrow);
             return;
         } else if ($text === 'Взять в долг') {
+        	setAction ( $chat_id, "action_borrow" );
         	sendKeyboard ( $chat_id, "Выберите действие", $keyboards->keyboardBorrow );
 		} else if ($text === 'Назад') {
+			setAction ( $chat_id, "action_borrow" );
             sendKeyboard ( $chat_id, "Выберите действие", $keyboards->keyboardBorrow );
             return;
 		}
@@ -80,6 +82,10 @@ class HandlerBorrow {
 			if ($text == "Да") {
 				setAction ( $chat_id, "action_borrow" );
                 $lender = getFileContent($chat_id, "lender");
+                if($lender === ""){
+                	sendKeyboard ( $chat_id, "Инвесторы не найдены", $keyboards->keyboardYesNo );
+                	return;
+                }
                 $sum = getFileContent ( $chat_id, "borrowsum" );
                 $per = getFileContent ( $chat_id, "borrowper" );
                 
