@@ -10,3 +10,5 @@ define('WEBHOOK_URL', 'https://alfaprofitbot.herokuapp.com/web/index.php');
 //  exit;
 //}
 echo "setWebhook OK";
+
+return "setWebhook Stoped";
