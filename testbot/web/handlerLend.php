@@ -16,9 +16,16 @@ class HandlerLend {
 		} else if ($text == 'Назад') {
 			setAction ( $chat_id, "action_lend" );
 			sendKeyboard ( $chat_id, "Выберите действие", $keyboards->keyboardLend );
+			return;
 		} else if ($text == 'Дать в долг') {
 			setAction ( $chat_id, "action_lend" );
 			sendKeyboard ( $chat_id, "Выберите действие", $keyboards->keyboardLend );
+			return;
+		} else if ($text == 'Аналитика') {
+			setAction ( $chat_id, "action_lend" );
+			addFileContent("borrowers", "qqqqq");
+			sendKeyboard ( $chat_id, $content, $keyboards->keyboardBack );
+			return;
 		} else if ($text == 'Инфо') {
 			setAction ( $chat_id, "action_lend_info" );
 			
