@@ -37,8 +37,13 @@ class HandlerBorrow {
         	setAction ( $chat_id, "action_borrow" );
         	sendKeyboard ( $chat_id, "Выберите действие", $keyboards->keyboardBorrow );
 		} else if ($text === 'Назад') {
-			setAction ( $chat_id, "action_borrow" );
-            sendKeyboard ( $chat_id, "Выберите действие", $keyboards->keyboardBorrow );
+			if($action == "action_borrow"){
+				setAction ( $chat_id, "-" );
+				sendStartScreen($chat_id, "Start Screen");
+			} else {
+				setAction ( $chat_id, "action_borrow" );
+				sendKeyboard ( $chat_id, "Выберите действие", $keyboards->keyboardLend );
+			}
             return;
 		}
 		
