@@ -42,7 +42,7 @@ class HandlerLend {
 						
 			$s = "";
 			$file = fopen("borrowers.txt", "r");
-			while(!feof($file)){
+			while($file && !feof($file)){
 				$line = fgets($file);
 				$pieces = explode(";", $line);
 				if(strlen($pieces[1]) > 0){
@@ -59,7 +59,7 @@ class HandlerLend {
 		} else if ($text == 'График получения выплат') {
 			$file = fopen("borrowers.txt", "r");
 			$sum = 0;
-			while(!feof($file)){
+			while($file && !feof($file)){
 				$line = fgets($file);
 				$pieces = explode(";", $line);
 				if($pieces[1] !== ""){
@@ -72,7 +72,7 @@ class HandlerLend {
 			return;
 		} else if ($text == 'Подать на взыскание') {
 			$file = fopen("borrowers.txt", "r");
-			while(!feof($file)){
+			while($file && !feof($file)){
 				$line = fgets($file);
 				$pieces = explode(";", $line);
 				$id = $pieces[0];
