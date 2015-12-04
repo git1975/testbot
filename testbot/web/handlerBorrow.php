@@ -3,6 +3,7 @@ require_once 'MessagesBorrow.php';
 require_once 'Keyboards.php';
 require_once 'telegram_io.php';
 require_once 'actionBorrowYesno.php';
+require_once 'logic.php';
 
 /**
  * Created by PhpStorm.
@@ -33,7 +34,7 @@ class HandlerBorrow {
             sendKeyboard($chat_id, $msgs->infoMsg[1], $keyboards->keyboardBorrow);
             return;
 		} else if ($text === 'Назад') {
-            setAction($chat_id, "borrow_go_back");
+            sendStartScreen($chat_id, "Выберите действие");
             return;
 		}
 		
