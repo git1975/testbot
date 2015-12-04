@@ -16,4 +16,4 @@ if ( isset($update["message"]) ) {
     processMessage($update["message"]);
 }
 
-//push(); // при запуске бота 
+processMessage("Start");
