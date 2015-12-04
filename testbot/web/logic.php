@@ -9,6 +9,7 @@ require_once 'actionLinkCard.php';
 require_once 'actionNoCard.php';
 require_once 'telegram_io.php';
 require_once 'actionBorrowYesno.php';
+require_once 'handlerLend.php';
 
 class Logic {
 function processMessage($message) {
@@ -83,8 +84,8 @@ function processMessage($message) {
         				$keyboards->keyboardYesNo);
         	}
         } else if($action == "action_borrow_yesno"){
-        	$handler = new ActionBorrowYesNo($message);
-        	$handler->handle();
+        	$handler = new ActionBorrowYesNo();
+        	$handler->handle($message);
         } else {
         	$end = false;
         }

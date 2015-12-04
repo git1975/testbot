@@ -1,9 +1,7 @@
 <?php
-require_once 'baseHandler.php';
-class HandlerLend extends BaseHandler {
-	function HandlerLend($message) {
-		$this->message = $message;
-		init ();
+
+class HandlerLend {
+	function HandlerLend() {
 	}
 	function handle() {
 		if ($text === 'Дать в долг') {

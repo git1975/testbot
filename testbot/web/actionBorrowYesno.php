@@ -1,19 +1,13 @@
 <?php
 
-require_once 'baseHandler.php';
 require_once 'MessagesBorrow.php';
 require_once 'Keyboards.php';
 
-class ActionBorrowYesNo extends BaseHandler{
-
-    function ActionBorrowYesNo($message){
-		$this->message = $message;
-		$this->init();
-	}
-	
-	function handle() {
+class ActionBorrowYesNo {
+	function handle($message) {
+		$chat_id = $this->message['chat']['id'];
+		$text = $this->message['text'];
         $kb = new Keyboards();
-        error_log("---->>>> function handle(): chat_id=$this->chat_id");
 		if($this->text == "Да"){
 
             sendKeyboard($this->chat_id, "Поздравляем! Вы успешно Вы оформили займ.",$kb->keyboardBorrow);
