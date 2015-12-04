@@ -120,7 +120,7 @@ function apiRequestJson($method, $parameters) {
 }
 
 function processMessage($message) {
-	setlocale(LC_ALL, 'ru_RU');
+	setlocale(LC_ALL, 'ru_RU.UTF-8');
 	
     $keyboards = new Keyboards;
     $msgStart = new MessagesStart;
