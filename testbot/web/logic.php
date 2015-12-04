@@ -9,7 +9,6 @@ require_once 'actionLinkCard.php';
 require_once 'actionNoCard.php';
 require_once 'telegram_io.php';
 require_once 'actionBorrowYesno.php';
-require_once 'handlerLend.php';
 
 class Logic {
 function processMessage($message) {
@@ -84,8 +83,8 @@ function processMessage($message) {
         				$keyboards->keyboardYesNo);
         	}
         } else if($action == "action_borrow_yesno"){
-        	$hander = new ActionBorrowYesNo($message);
-        	$hander.handle();
+        	$handler = new ActionBorrowYesNo($message);
+        	$handler->handle();
         } else {
         	$end = false;
         }
@@ -108,9 +107,6 @@ function processMessage($message) {
         	sendMsg($chat_id, $msg->launchMsg[0]);
         	sendMsg($chat_id, $msg->launchMsg[1]);
         	sendKeyboard($chat_id, $msg->launchMsg[2], $keyboards->keyboardBorrow);
-        } else if ($text === 'Дать в долг') {
-        	$hander = new HandlerLend($message);
-        	$hander.handle();        	        	
         } else if (strcasecmp($text, "start") === 0 || strcasecmp($action, "start") === 0) {
         	sendStartScreen($chat_id, "");
         } else if (strcasecmp($text, "lend") === 0) {
