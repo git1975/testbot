@@ -32,6 +32,9 @@ function processMessage($message) {
         error_log("---->>>>action: $action");
         
         $end = true;
+        if ($text === 'Назад' || $text === 'start') {
+        	sendStartScreen($chat_id, "");
+        }
         // Action handler
         if($action == "action_card_link"){
         	if(!is_numeric($text) || strlen($text) !== 16){
