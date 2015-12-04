@@ -144,8 +144,13 @@ function addFileContent($name, $content) {
 }
 
 function getFileContent($chat_id, $name) {
-	//$file = "$chat_id_$name.txt";
     $file = $chat_id."_".$name.".txt";
+	$content = file_get_contents($file);
+	return $content;
+}
+
+function getFileContent2($name) {
+	$file = $name.".txt";
 	$content = file_get_contents($file);
 	return $content;
 }
