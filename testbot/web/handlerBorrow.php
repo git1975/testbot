@@ -26,11 +26,6 @@ class HandlerBorrow {
 		$action = getAction ( $chat_id );
         $msgs = new MessagesBorrow();
 
-        setAction($chat_id, "borrow_payment_schedule");
-        setAction($chat_id, "borrow_loan_data");
-        setAction($chat_id, "borrow_debt_remaining");
-        setAction($chat_id, "borrow_ask_rating");
-
 
 		if ($text === 'Инфо') {
             setAction ( $chat_id, "action_borrow_info" );
