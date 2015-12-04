@@ -1,5 +1,5 @@
 <?php
-require_once 'index.php';
+require_once 'common.php';
 
 define('WEBHOOK_URL', 'https://alfaprofitbot.herokuapp.com/web/index.php');
 
