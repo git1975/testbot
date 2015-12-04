@@ -84,7 +84,10 @@ class HandlerBorrow {
 				setAction ( $chat_id, "action_borrow_yesno" );
 				setFileContent ( $chat_id, "borrowper", $text );
 				$sum = getFileContent ( $chat_id, "borrowsum" );
+
 				sendMsg ( $chat_id, "Ты запросил $sum руб на $text мес." );
+                sendMsg($chat_id,$msgs->getSumAndScheduleMessage($sum, $text));
+                sendMsg($chat_id,$msgs->loanInqMsg[4]);
 				sendKeyboard ( $chat_id, "Согласен?", $keyboards->keyboardYesNo );
 			}
 

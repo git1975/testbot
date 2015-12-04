@@ -1,5 +1,6 @@
 <?php
-
+include_once 'PaymentLogic.php';
+include_once 'RiskLogic.php';
 /**
  * Created by PhpStorm.
  * User: gmananton
@@ -8,6 +9,32 @@
  * Экраны и сообщения для заемщика
  */
 class MessagesBorrow {
+
+
+
+
+    private function getRiskGroup() {
+        $riskLogic = new RiskLogic();
+        return $riskLogic->getUserGroupRisk(); //Не забыть поправить на вызов с userId для реального сервиса
+    }
+
+    private function getPercent() {
+        $riskLogic = new RiskLogic();
+        return $riskLogic->getLoanPercent($riskLogic->getUserGroupRisk()); //Не забыть поправить на вызов с userId для реального сервиса
+    }
+
+    private function calcMonthlyPayment($loanSum, $period, $percent) {
+        $paymentLogic = new PaymentLogic();
+        return $paymentLogic->getPaymentMonthlyInq($loanSum, $period, $percent);
+    }
+
+    private function getPaymentSchedule($monthCount) {
+        $paymentLogic = new PaymentLogic();
+        return $paymentLogic->getPaymentSchedule($monthCount); //это массив
+    }
+
+
+
 
     /* При переходе на экран заемщика */
     public $launchMsg = [
@@ -103,6 +130,27 @@ class MessagesBorrow {
         "Ты запросил 30 000 руб на 18 мес.",
 
         "Твой график платежей будет следующим… Напиши Да, если .. Нет, если…"
-];
+    ];
+
+    public function getSumAndScheduleMessage($sum, $monthCount){
+        $datesArray = $this->getPaymentSchedule($monthCount);
+        $resultArray = [];
+        $resultMsg = "Ты запросил $sum руб. на $monthCount мес.
+        Твой график платежей будет следующим:";
+        $i=0;
+        $percent = $this->getPercent();
+        foreach ($datesArray as $date) {
+            $resultArray[$i] = $date."   ".$this->calcMonthlyPayment($sum,$monthCount,$percent);
+            $i+=1;
+        }
+
+        foreach ($resultArray as $line) {
+            $resultMsg.$line."\n";
+        }
+
+        return $resultMsg;
+
+    }
+
 
 }
