@@ -1,7 +1,7 @@
 <?php
 require_once 'Keyboards.php';
 class HandlerLend {
-	function handle() {
+	function handle($message) {
 		$chat_id = $message ['chat'] ['id'];
 		$text = $message ['text'];
 		$keyboards = new Keyboards ();
