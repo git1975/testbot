@@ -248,12 +248,12 @@ function processMessage($message) {
         	$file = "action_$chat_id.txt";
         	//$content = file_get_contents($file);
         	file_put_contents($file, "action_card_link");
-        	apiRequest("sendMessage", array('chat_id' => $current, "text" => "Введите номер карты"));
+        	apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => "Введите номер карты"));
         } else if ($text === 'Нет карты банка') {
         	
         } else if ($text === 'Инфо') {
         	$content = f();
-        	apiRequest("sendMessage", array('chat_id' => $current, "text" => $content));
+        	apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => $content));
         } else {
             apiRequestWebhook("sendMessage",
                 [
