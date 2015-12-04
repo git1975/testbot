@@ -6,6 +6,8 @@ class HandlerLend {
 		$text = $message['text'];
 		
 		if ($text === 'Дать в долг') {
+			error_log("---->>>>HandlerLend: $text");
+			
 			setAction ( $chat_id, "action_lend" );
 			$msg = new MessagesLend ();
 			sendMsg ( $chat_id, $msg->launchMsg [0] );
