@@ -52,6 +52,9 @@ class HandlerLend {
 			}
 			fclose($file);
 			
+			$s = $s."...\r\n";
+			$s = $s."01.12.2015 на сумму=300 на срок 3 мес.\r\n";
+			
 			//$pieces = explode(" ", $borrowers);
 			
 			sendKeyboard ( $chat_id, $s, $keyboards->keyboardBack );
