@@ -48,7 +48,7 @@ class HandlerBorrow {
                 sendKeyboard ( $chat_id, $msgs->takenLoansMsg, $keyboards->keyboardBorrow );
             } else if ($text == "Узнать ставку") {
                 setAction ( $chat_id, action_borrow_ask_rating);
-                sendKeyboard ( $chat_id, $msgs->ratingMsg, $keyboards->keyboardBorrow );
+                sendKeyboard ( $chat_id, $msgs->ratingMsg[0], $keyboards->keyboardBorrow );
             } else if ($text == "График платежей") {
                 setAction ( $chat_id, action_borrow_payment_schedule);
                 sendKeyboard ( $chat_id, $msgs->payScheduleMsg, $keyboards->keyboardBorrow );
