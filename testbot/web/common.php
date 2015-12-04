@@ -167,11 +167,11 @@ function processMessage($message) {
                         'resize_keyboard' => true
                     ]
                 ]);
-        } else if ($text === strtolower("я инвестор", 'utf8')) {
+        } else if (strcasecmp($text, strtolower("я инвестор", 'utf8')) == 0) {
         	$file = 'user1.txt';
         	file_put_contents($file, $chat_id);
         	apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => 'Ок, я запомнил!'));
-        } else if ($text === strtolower("я заемщик", 'utf8')) {
+        } else if (strcasecmp($text, strtolower("я заемщик", 'utf8')) == 0) {
         		$file = 'user2.txt';
         		file_put_contents($file, $chat_id);
         		apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => 'Ок, я запомнил!'));
@@ -179,7 +179,7 @@ function processMessage($message) {
         		$file = 'user1.txt';
         		$current = file_get_contents($file);
         		apiRequest("sendMessage", array('chat_id' => $current, "text" => 'Заемщик появился!'));
-        } else if ($text === strtolower("привет", 'utf8')) {
+        } else if (strcasecmp($text, strtolower("привет", 'utf8')) == 0) {
         	apiRequest("sendMessage", array('chat_id' => $current, "text" => 'Рад Вас видеть!'));
         } else if ($text === strtolower("пока", 'utf8')) {
         		apiRequest("sendMessage", array('chat_id' => $current, "text" => 'До свидания!'));
