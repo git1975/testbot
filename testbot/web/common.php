@@ -4,6 +4,9 @@ require_once 'Keyboards.php';
 require_once 'MessagesStart.php';
 require_once 'MessagesBorrow.php';
 require_once 'MessagesLend.php';
+require_once 'actionInfo.php';
+require_once 'actionLinkCard.php';
+require_once 'actionNoCard.php';
 
 //define('BOT_TOKEN', '148713043:AAEb7CdO-XXnEzM7nlZVHn4wSixatlQ45DI');
 define('BOT_TOKEN', '172422666:AAEy8f1P2sSigKdE-RqSE7jxC7LYI4cACQ8');
@@ -119,6 +122,26 @@ function apiRequestJson($method, $parameters) {
     return exec_curl_request($handle);
 }
 
+function setAction($chat_id, $action) {
+	$file = "action_$chat_id.txt";
+	file_put_contents($file, $action);
+}
+
+function setFileContent($chat_id, $name, $content) {
+	$file = "$name_$chat_id.txt";
+	file_put_contents($file, $content);
+}
+
+function getFileContent($chat_id, $name) {
+	$file = "$name_$chat_id.txt";
+	$content = file_get_contents($file);
+	return $content;
+}
+
+function send($chat_id, $content){
+	apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => $content));
+}
+
 function processMessage($message) {
 	//setlocale(LC_ALL, 'ru_RU.UTF-8');
 
@@ -137,9 +160,29 @@ function processMessage($message) {
         //$text = strtolower($text);
         error_log("chat_id: $chat_id");
         error_log("INCOMING MESSAGE: $text");
+        
+        $file = "action_$chat_id.txt";
+        $action = file_get_contents($file);
+        
+        if($action == "action_card_link"){
+        	if(strlen($text) !== 20){
+        		apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => "Неверный формат номера карты"));
+        	} else {
+        		setAction($chat_id, "action_card_commit");
+        		apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => "Подтвердите секретный код 1234"));
+        		setFileContent($chat_id, "action_card_code", "1234");
+        	}
+        } else if($action == "action_card_commit"){
+        	$content = setFileContent($chat_id, "action_card_code");
+        	if (strcasecmp($text, $content) === 0) {
+        		setAction($chat_id, "start");
+        		send($chat_id, "Ваша карта привязана");
+        	} else {
+        		send($chat_id, "Код неверный");
+        	}
+        }
 
-
-        if (strcasecmp($text, "start") === 0) {
+        if (strcasecmp($text, "start") === 0 || strcasecmp($action, "start") === 0) {
             apiRequestJson("sendMessage",
                 [
                     'chat_id' => $chat_id,
@@ -200,6 +243,17 @@ function processMessage($message) {
         	apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => 'Рад Вас видеть!'));
         } else if ($text === "пока") {
         		apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => 'До свидания!'));
+        		//++++++++==============
+        } else if ($text === 'Привязать карту') {        	
+        	$file = "action_$chat_id.txt";
+        	//$content = file_get_contents($file);
+        	file_put_contents($file, "action_card_link");
+        	apiRequest("sendMessage", array('chat_id' => $current, "text" => "Введите номер карты"));
+        } else if ($text === 'Нет карты банка') {
+        	
+        } else if ($text === 'Инфо') {
+        	$content = f();
+        	apiRequest("sendMessage", array('chat_id' => $current, "text" => $content));
         } else {
             apiRequestWebhook("sendMessage",
                 [
