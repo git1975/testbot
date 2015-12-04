@@ -1,6 +1,6 @@
 <?php
 require_once 'index.php';
 
-apiRequest('setWebhook', '');
+apiRequest('setWebhook', array('url' => ''));
 
 echo "setWebhook Stoped";
