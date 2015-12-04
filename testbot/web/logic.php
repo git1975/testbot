@@ -34,7 +34,7 @@ function processMessage($message) {
         $end = true;
         // Action handler
         if($action == "action_card_link"){
-        	if(!is_numeric($text) || strlen($text) !== 16 || $text !== "q"){
+        	if(!is_numeric($text) || strlen($text) !== 16){
         		sendMsg($chat_id, "Неверный формат номера карты");
         	} else {
         		setAction($chat_id, "action_card_commit");
