@@ -1,17 +1,14 @@
 <?php
-
+require_once 'Keyboards.php';
 class HandlerLend {
 	function handle() {
-		$chat_id = $message['chat']['id'];
-		$text = $message['text'];
+		$chat_id = $message ['chat'] ['id'];
+		$text = $message ['text'];
+		$keyboards = new Keyboards ();
 		
-		if ($text === 'Дать в долг') {
-			error_log("---->>>>HandlerLend: $text");
-			
-			setAction ( $chat_id, "action_lend" );
-			$msg = new MessagesLend ();
-			sendMsg ( $chat_id, $msg->launchMsg [0] );
-			sendKeyboard ( $chat_id, $msg->launchMsg [1], $keyboards->keyboardLend );
+		if ($text == 'Разместить сумму') {
+			setAction ( $chat_id, "action_lend_sum" );
+			sendKeyboard ( $chat_id, "Напиши сумму инвестиций. Например, 5000", $keyboards->keyboardLend );
 		}
 	}
 }

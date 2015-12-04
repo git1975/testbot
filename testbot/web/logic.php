@@ -89,7 +89,7 @@ function processMessage($message) {
         } else if($action == "action_borrow_yesno"){
         	$handler = new ActionBorrowYesNo();
         	$handler->handle($message);
-        } else if($action == "action_lend"){ 	
+        } else if(strpos($action, "action_lend") !== false){ 	
         	$handler = new HandlerLend();
         	$handler->handle($message);
         } else {
