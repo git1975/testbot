@@ -81,7 +81,7 @@ class HandlerBorrow {
         } else if ($action == "action_borrow_yesno") {
 			if ($text == "Да") {
 				setAction ( $chat_id, "action_borrow" );
-                $lender = getFileContent($chat_id, "lender");
+                $lender = getFileContent2("lender");
                 if($lender === ""){
                 	sendKeyboard ( $chat_id, "Инвесторы не найдены", $keyboards->keyboardYesNo );
                 	return;
