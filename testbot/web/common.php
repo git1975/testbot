@@ -120,7 +120,7 @@ function apiRequestJson($method, $parameters) {
 }
 
 function processMessage($message) {
-	setlocale(LC_ALL, 'ru_RU.UTF-8');
+	//setlocale(LC_ALL, 'ru_RU.UTF-8');
 	
     $keyboards = new Keyboards;
     $msgStart = new MessagesStart;
@@ -175,7 +175,7 @@ function processMessage($message) {
         	$file = 'user1.txt';
         	file_put_contents($file, $chat_id);
         	apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => 'Ок, инвестор!'));
-        } else if (strtolower($text) == strtolower("я заемщик")) {
+        } else if (mb_strtolower($text) == mb_strtolower("я заемщик")) {
         		$file = 'user2.txt';
         		file_put_contents($file, $chat_id);
         		apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => 'Ок, заемщик!'));

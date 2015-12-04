@@ -1,7 +1,7 @@
 {
-    "name": "testbot",
-    "description": "testbot",
-    "keywords": ["testbot"],
+    "name": "alfaprofitbot",
+    "description": "alfaprofitbot",
+    "keywords": ["alfaprofitbot"],
     "authors": [
         {
             "name": "Denis Zorin"
@@ -9,6 +9,7 @@
     ],
     "require": {
         "php": ">=5.4.0",
-        "predis/predis": "~1.0"
+        "predis/predis": "~1.0",
+        "ext-mbstring": "*"
     }
 }
