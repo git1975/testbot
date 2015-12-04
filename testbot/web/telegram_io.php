@@ -138,8 +138,8 @@ function setFileContent($chat_id, $name, $content) {
 	file_put_contents($file, $content);
 }
 
-function addFileContent($chat_id, $name, $content) {
-	$file = $chat_id."_".$name.".txt";
+function addFileContent($name, $content) {
+	$file = $name.".txt";
 	file_put_contents($file, $content. "\n", FILE_APPEND);
 }
 
