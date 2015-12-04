@@ -24,8 +24,7 @@ function processMessage($message) {
     if (isset($message['text'])) {
         // incoming text message
         $text = $message['text'];
-        $file = "action_$chat_id.txt";
-        $action = file_get_contents($file);
+        $action = getAction($chat_id);
         
         error_log("---->>>>chat_id: $chat_id");
         error_log("---->>>>MSG: $text");
@@ -117,8 +116,7 @@ function processMessage($message) {
         } else if ($text === 'Дать в долг') {
         	setAction ( $chat_id, "action_lend" );
         	$msg = new MessagesLend ();
-        	sendMsg ( $chat_id, $msg->launchMsg [0] );
-        	sendKeyboard ( $chat_id, $msg->launchMsg [1], $keyboards->keyboardLend );        	
+        	sendKeyboard ( $chat_id, $msg->launchMsg [0], $keyboards->keyboardLend );        	
         } else if (strcasecmp($text, "start") === 0 || strcasecmp($action, "start") === 0) {
         	sendStartScreen($chat_id, "");
         } else if (strcasecmp($text, "lend") === 0) {

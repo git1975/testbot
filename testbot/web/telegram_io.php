@@ -127,6 +127,12 @@ function setAction($chat_id, $action) {
 	file_put_contents($file, $action);
 }
 
+function getAction($chat_id) {
+	$file = "action_$chat_id.txt";
+	$action = file_get_contents($file);
+	return $action;
+}
+
 function setFileContent($chat_id, $name, $content) {
 	//$file = "$chat_id_$name.txt";
     $file = $chat_id."_".$name.".txt";
