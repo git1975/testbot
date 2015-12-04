@@ -12,7 +12,14 @@ require_once 'actionBorrowYesno.php';
  */
 class HandlerBorrow {
     //TODO до кнопок да и нет должно выводиться сообщение с графиком платежей
-	function handle($message) {
+
+    function sendAllMessages($chat_id, $msgArray) {
+        foreach ($msgArray as $message) {
+            sendMsg($chat_id, $message);
+        }
+    }
+
+    function handle($message) {
 		$chat_id = $message ['chat'] ['id'];
 		$text = $message ['text'];
 		$keyboards = new Keyboards ();
@@ -27,11 +34,7 @@ class HandlerBorrow {
 
 		if ($text === 'Инфо') {
             setAction ( $chat_id, "action_borrow_info" );
-            $messages = $msgs->infoMsg;
-            foreach ($messages as $message) {
-                sendMsg($chat_id, $message);
-            }
-
+            $this->sendAllMessages($msgs->infoMsg);
             sendKeyboard($chat_id, $msgs->infoMsg, $keyboards->keyboardBorrow);
             return;
 		} else if ($text === 'Назад') {
