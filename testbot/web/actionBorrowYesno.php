@@ -1,6 +1,11 @@
 <?php
-class ActionBorrowYesno{
-	function handle($message) {
+class ActionBorrowYesno extends BaseHandler{
+	function ActionBorrowYesno($message){
+		self::$message = $message;
+		init();
+	}
+	
+	function handle() {
 		if($text == "Да"){
 		
 		} else if($text == "Нет"){

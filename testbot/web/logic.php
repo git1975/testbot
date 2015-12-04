@@ -8,6 +8,7 @@ require_once 'actionInfo.php';
 require_once 'actionLinkCard.php';
 require_once 'actionNoCard.php';
 require_once 'telegram_io.php';
+require_once 'actionBorrowYesno.php';
 
 class Logic {
 function processMessage($message) {
@@ -82,14 +83,8 @@ function processMessage($message) {
         				$keyboards->keyboardYesNo);
         	}
         } else if($action == "action_borrow_yesno"){
-        	if($text == "Да"){
-        		
-        	} else if($text == "Нет"){
-        		
-        	} else {
-        		sendKeyboard($chat_id, "Ответьте Да или Нет",
-        				$keyboards->keyboardYesNo);
-        	}
+        	$hander = new ActionBorrowYesno($message);
+        	$hander.handle();
         } else {
         	$end = false;
         }
