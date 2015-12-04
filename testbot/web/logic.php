@@ -8,7 +8,7 @@ require_once 'actionInfo.php';
 require_once 'actionLinkCard.php';
 require_once 'actionNoCard.php';
 require_once 'telegram_io.php';
-require_once 'ActionBorrowYesNo.php';
+require_once 'actionBorrowYesNo.php';
 
 class Logic {
 function processMessage($message) {
