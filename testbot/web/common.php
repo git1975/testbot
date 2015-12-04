@@ -164,6 +164,8 @@ function processMessage($message) {
         $file = "action_$chat_id.txt";
         $action = file_get_contents($file);
         
+        $end = true;
+        
         if($action == "action_card_link"){
         	if(strlen($text) !== 20){
         		apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => "Неверный формат номера карты"));
@@ -174,12 +176,19 @@ function processMessage($message) {
         	}
         } else if($action == "action_card_commit"){
         	$content = setFileContent($chat_id, "action_card_code");
+        	error_log("---->>>>action_card_code: $content");
         	if (strcasecmp($text, $content) === 0) {
         		setAction($chat_id, "start");
         		send($chat_id, "Ваша карта привязана");
         	} else {
         		send($chat_id, "Код неверный");
         	}
+        } else {
+        	$end = false;
+        }
+        
+        if($end){
+        	return;
         }
 
         if (strcasecmp($text, "start") === 0 || strcasecmp($action, "start") === 0) {
