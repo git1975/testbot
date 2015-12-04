@@ -1,5 +1,7 @@
 <?php
 require_once 'Keyboards.php';
+require_once 'telegram_io.php';
+
 class HandlerLend {
 	function handle($message) {
 		$chat_id = $message ['chat'] ['id'];
