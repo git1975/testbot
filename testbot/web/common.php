@@ -121,6 +121,7 @@ function apiRequestJson($method, $parameters) {
 
 function processMessage($message) {
 	//setlocale(LC_ALL, 'ru_RU.UTF-8');
+    error_log("Method processMessage. Input parameter message: $message");
 	
     $keyboards = new Keyboards;
     $msgStart = new MessagesStart;
@@ -153,7 +154,7 @@ function processMessage($message) {
             apiRequestJson("sendMessage",
                 [
                     'chat_id' => $chat_id,
-                    'text' => 'borrwo screen testing. Keyboard: '.implode($keyboards->keyboardLend),
+                    'text' => '',
                     'reply_markup' => [
                         'keyboard' => $keyboards->keyboardLend,
                         'one_time_keyboard' => true,
