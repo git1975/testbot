@@ -140,6 +140,15 @@ function getFileContent($chat_id, $name) {
 	return $content;
 }
 
+function isCardLinked($chat_id){
+	$content = getFileContent($chat_id, "card");
+	if(strlen($content) !== 16){
+		return true;
+	} else {
+		return false;
+	}
+}
+
 function send($chat_id, $content){
 	apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => $content));
 }
@@ -149,12 +158,16 @@ function sendStartScreen($chat_id, $content){
 		$content = 'Start screen';
 	}
 	$keyboards = new Keyboards;
+	$keyboard = $keyboards->keyboardStart;
+	if(isCardLinked($chat_id)){
+		$keyboard = $keyboards->keyboardLendBorrow;
+	}
 	 apiRequestJson("sendMessage",
                 [
                     'chat_id' => $chat_id,
                     'text' => $content,
                     'reply_markup' => [
-                        'keyboard' => $keyboards->keyboardStart,
+                        'keyboard' => $keyboard,
                         'one_time_keyboard' => true,
                         'resize_keyboard' => true
                     ]
@@ -186,7 +199,7 @@ function processMessage($message) {
         $end = true;
         
         if($action == "action_card_link"){
-        	if(strlen($text) !== 20){
+        	if(strlen($text) !== 16){
         		apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => "Неверный формат номера карты"));
         	} else {
         		setAction($chat_id, "action_card_commit");
