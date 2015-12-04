@@ -1,6 +1,6 @@
 <?php
 
-//require_once 'common.php';
+require_once 'logic.php';
 
 error_log('index.php started');
 
