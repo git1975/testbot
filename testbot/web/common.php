@@ -213,9 +213,9 @@ function processMessage($message) {
         	$content = getFileContent($chat_id, "code");
         	if (strcasecmp($text, $content) === 0) {
         		setAction($chat_id, "start");
-        		sendStartScreen($chat_id, "Ваша карта привязана");
          		$content = getFileContent($chat_id, "card_pre");
        			setFileContent($chat_id, "card", $content);
+        		sendStartScreen($chat_id, "Ваша карта привязана");
         	} else {
         		send($chat_id, "Код неверный");
         	}
