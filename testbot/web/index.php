@@ -17,4 +17,3 @@ if ( isset($update["message"]) ) {
     $logic->processMessage($update["message"]);
 }
 
-processMessage("Start");
