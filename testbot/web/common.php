@@ -234,6 +234,36 @@ function processMessage($message) {
         	} else {
         		send($chat_id, "Код неверный");
         	}
+        } else if($action == "action_borrow"){
+        	if($text == 'Запросить займ'){
+        		setAction($chat_id, "action_borrow_sum");
+        		send($chat_id, "Напиши сумму, которую ты хочешь занять и срок. Я рассчитаю тебе сумму ежемесячного платежа. "
+        				. "Эта сумма будет автоматически списываться с твоего счета. При отсутствии на счете необходимой суммы "
+        				. "займ будет считаться просроченным и кредитор сможет инициировать взыскание");
+        		sendKeyboard($chat_id, "Сначала напиши сумму, например 20000",
+        				$keyboards->keyboardBorrow);
+        	}
+        } else if($action == "action_borrow_sum"){
+        	if(is_numeric($text)){
+        		send($chat_id, "Неверный формат суммы");
+        	} else {
+        		setAction($chat_id, "action_borrow_per");
+        		setFileContent($chat_id, "borrowsum", $text);
+        		send($chat_id, "Напиши срок");
+        	}
+        } else if($action == "action_borrow_per"){
+        	if(is_numeric($text) || strlen($text) > 2){
+        		send($chat_id, "Неверный формат процентов");
+        	} else {
+        		setAction($chat_id, "action_borrow_yesno");
+        		setFileContent($chat_id, "borrowper", $text);
+        		$sum = getFileContent($chat_id, "borrowsum");
+        		send($chat_id, "Ты запросил $sum руб на $text мес.");
+        		sendKeyboard($chat_id, "Согласен?",
+        				$keyboards->keyboardBorrow);
+        	}
+        } else if($action == "action_borrow_yesno"){
+        	
         } else {
         	$end = false;
         }
@@ -303,7 +333,7 @@ function processMessage($message) {
         } else if ($text === 'Инфо') {
         	send($chat_id, $text);
         } else if ($text === 'Взять в долг') {
-        	setAction($chat_id, "action_card_link");        	
+        	setAction($chat_id, "action_borrow");        	
         	$msg = new MessagesBorrow();
         	send($chat_id, $msg->launchMsg[0]);
         	send($chat_id, $msg->launchMsg[1]);
