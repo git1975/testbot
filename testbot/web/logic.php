@@ -10,6 +10,7 @@ require_once 'actionNoCard.php';
 require_once 'telegram_io.php';
 require_once 'actionBorrowYesno.php';
 require_once 'handlerLend.php';
+require_once 'handlerBorrow.php';
 
 class Logic {
 function processMessage($message) {
@@ -57,7 +58,8 @@ function processMessage($message) {
         	} else {
         		sendMsg($chat_id, "Код неверный");
         	}
-        } else if($action == "action_borrow"){
+        }
+        /* else if($action == "action_borrow"){
         	if($text == 'Запросить займ'){
         		setAction($chat_id, "action_borrow_sum");
         		sendMsg($chat_id, "Напиши сумму, которую ты хочешь занять и срок. Я рассчитаю тебе сумму ежемесячного платежа. "
@@ -85,8 +87,9 @@ function processMessage($message) {
         		sendKeyboard($chat_id, "Согласен?",
         				$keyboards->keyboardYesNo);
         	}
-        } else if($action == "action_borrow_yesno"){
-        	$handler = new ActionBorrowYesNo();
+        } else */
+        if(strpos($action, "action_borrow")  !== false){
+        	$handler = new HandlerBorrow();
         	$handler->handle($message);
         } else if(strpos($action, "action_lend") !== false){ 	
         	$handler = new HandlerLend();

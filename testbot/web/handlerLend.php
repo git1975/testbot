@@ -13,7 +13,13 @@ class HandlerLend {
 			setAction ( $chat_id, "action_lend_sum" );
 			sendMsg ( $chat_id, "Напиши сумму инвестиций. Например, 5000" );
 			return;
+		} else if ($text == 'Инфо') {
+			setAction ( $chat_id, "action_lend_info" );
+			sendMsg ( $chat_id, "Вы инвестировали:1) 16.01.2015 - 10 000 руб. Из них выдано для:-)16.01.2015 | Смирнов А.В. (id 12345) | 500 руб. | Остат 389 руб. | Рейт. B | Став. 20% | Займ 100 000 руб.-)16.01.2015 | Иванов С.В. (id 23453) | 500 руб. | Остат 356 руб. | Рейт. C | Став. 30% | Займ 50 000 руб.-)17.01.2015 | Симонов М.К. (id 74473) | 500 руб. | Остат 389 руб. | Рейт. C | Став. 30% | Займ 30 000 руб" );
+			sendKeyboard($chat_id, "", $keyboards->keyboardYesNo);
+			return;
 		}
+			
 		if($action == "action_lend_sum"){
 			if(!is_numeric($text)){
 				sendMsg($chat_id, "Неверный формат суммы");
