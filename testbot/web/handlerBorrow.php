@@ -27,6 +27,11 @@ class HandlerBorrow {
 
 		if ($text === 'Инфо') {
             setAction ( $chat_id, "action_borrow_info" );
+            $messages = $msgs->infoMsg;
+            foreach ($messages as $message) {
+                sendMsg($chat_id, $message);
+            }
+
             sendKeyboard($chat_id, $msgs->infoMsg, $keyboards->keyboardBorrow);
             return;
 		} else if ($text === 'Назад') {
