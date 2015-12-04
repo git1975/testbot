@@ -89,6 +89,9 @@ function processMessage($message) {
         } else if($action == "action_borrow_yesno"){
         	$handler = new ActionBorrowYesNo();
         	$handler->handle($message);
+        } else if($action == "action_borrow"){ 	
+        	$handler = new HandlerLend();
+        	$handler->handle($message);
         } else {
         	$end = false;
         }
@@ -112,8 +115,10 @@ function processMessage($message) {
         	sendMsg($chat_id, $msg->launchMsg[1]);
         	sendKeyboard($chat_id, $msg->launchMsg[2], $keyboards->keyboardBorrow);
         } else if ($text === 'Дать в долг') {
-        	$handler = new HandlerLend();
-        	$handler->handle($message);
+        	setAction ( $chat_id, "action_lend" );
+        	$msg = new MessagesLend ();
+        	sendMsg ( $chat_id, $msg->launchMsg [0] );
+        	sendKeyboard ( $chat_id, $msg->launchMsg [1], $keyboards->keyboardLend );        	
         } else if (strcasecmp($text, "start") === 0 || strcasecmp($action, "start") === 0) {
         	sendStartScreen($chat_id, "");
         } else if (strcasecmp($text, "lend") === 0) {
