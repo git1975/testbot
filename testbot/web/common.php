@@ -143,7 +143,7 @@ function processMessage($message) {
             apiRequestJson("sendMessage",
                 [
                     'chat_id' => $chat_id,
-                    'text' => '',
+                    'text' => 'Start screen',
                     'reply_markup' => [
                         'keyboard' => $keyboards->keyboardStart,
                         'one_time_keyboard' => true,
@@ -154,7 +154,7 @@ function processMessage($message) {
             apiRequestJson("sendMessage",
                 [
                     'chat_id' => $chat_id,
-                    'text' => '',
+                    'text' => 'Lend screen',
                     'reply_markup' => [
                         'keyboard' => $keyboards->keyboardLend,
                         'one_time_keyboard' => true,
@@ -165,15 +165,26 @@ function processMessage($message) {
             apiRequestJson("sendMessage",
                 [
                     'chat_id' => $chat_id,
-                    //'text' => 'lendscreen testing. Keyboard: '.implode($keyboards->keyboardLend),
-                    'text' => '',
+                    'text' => 'Borrow Screen',
                     'reply_markup' => [
                         'keyboard' => $keyboards->keyboardBorrow,
                         'one_time_keyboard' => true,
                         'resize_keyboard' => true
                     ]
                 ]);
-        } else if ($text == "я инвестор") {
+        } else if (strcasecmp($text, "borrowlendscreen") === 0) {
+            apiRequestJson("sendMessage",
+                [
+                    'chat_id' => $chat_id,
+                    'text' => 'Borrow-Lend Screen',
+                    'reply_markup' => [
+                        'keyboard' => $keyboards->keyboardLendBorrow,
+                        'one_time_keyboard' => true,
+                        'resize_keyboard' => true
+                    ]
+                ]);
+        }
+        else if ($text == "я инвестор") {
         	$file = 'user1.txt';
         	file_put_contents($file, $chat_id);
         	apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => 'Ок, инвестор!'));
@@ -215,3 +226,6 @@ function push() {
     //apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => 'Ок, я запомнил!'));
 
 }
+
+processMessage("startscreen");
+
