@@ -11,7 +11,7 @@ class HandlerLend {
 		
 		if ($text == 'Разместить сумму') {
 			setAction ( $chat_id, "action_lend_sum" );
-			sendKeyboard ( $chat_id, "Напиши сумму инвестиций. Например, 5000", $keyboards->keyboardLend );
+			sendMsg ( $chat_id, "Напиши сумму инвестиций. Например, 5000" );
 			return;
 		}
 		if($action == "action_lend_sum"){
@@ -29,12 +29,11 @@ class HandlerLend {
 				sendKeyboard($chat_id, "Вы инвестировали $sum руб. Следите за Аналитокой", $keyboards->keyboardBorrow);
 			} else if($text == "Нет"){
 				setAction($chat_id, "action_lend_sum");
-				sendKeyboard ( $chat_id, "Напиши сумму инвестиций. Например, 5000", $keyboards->keyboardLend );
+				sendKeyboard ( $chat_id, "Напиши сумму инвестиций. Например, 5000" );
 			} else {
 				sendKeyboard($chat_id, "Ответьте Да или Нет",
 						$kb->keyboardYesNo);
 			}
-			sendMsg($chat_id, "Сумма принята");
 		}
 	}
 }
