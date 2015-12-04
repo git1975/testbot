@@ -82,15 +82,19 @@ class HandlerBorrow {
 				setAction ( $chat_id, "action_borrow" );
                 $lender = getFileContent($chat_id, "lender");
                 $sum = getFileContent ( $chat_id, "borrowsum" );
+                $per = getFileContent ( $chat_id, "borrowper" );
+                
+                $str = $chat_id . ";" . $sum . ";" . $per . ";";
+                addFileContent ( $chat_id, "borrowers", $str );
+                
                 sendMsg($lender, "Заемщик списал сумму $sum");
-				sendKeyboard ( $chat_id, "Поздравляем! Вы успешно Вы оформили займ.", $keyboards->keyboardBorrow );
+				sendKeyboard ( $chat_id, "Поздравляем! Вы успешно оформили займ.", $keyboards->keyboardBorrow );
 			} else if ($text == "Нет") {
 				setAction ( $chat_id, "action_borrow" );
 				sendKeyboard ( $chat_id, "Вы отказались от займа", $keyboards->keyboardBorrow );
 			} else {
 				sendKeyboard ( $chat_id, "Ответьте Да или Нет", $keyboards->keyboardYesNo );
 			}
-
         } else if ($action == "action_borrow_payment_schedule") {
             //TODO тут вроде нет никаких действий
 

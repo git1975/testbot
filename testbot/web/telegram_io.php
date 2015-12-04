@@ -134,9 +134,13 @@ function getAction($chat_id) {
 }
 
 function setFileContent($chat_id, $name, $content) {
-	//$file = "$chat_id_$name.txt";
     $file = $chat_id."_".$name.".txt";
 	file_put_contents($file, $content);
+}
+
+function addFileContent($chat_id, $name, $content) {
+	$file = $chat_id."_".$name.".txt";
+	file_put_contents($file, $content. "\n", FILE_APPEND);
 }
 
 function getFileContent($chat_id, $name) {
