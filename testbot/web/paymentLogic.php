@@ -1,5 +1,5 @@
 <?php
-
+include_once 'MessagesBorrow.php';
 /**
  * Created by PhpStorm.
  * User: gmananton
@@ -9,6 +9,40 @@
  */
 class PaymentLogic {
 
-    
+    /* Расчет графика платежей для единственного запрошенного займа */
+    public function getPaymentMonthlyInq($loanSum, $periodMonths, $percent) {
+        // PMT = PV * (i/12) / [ 1 - (1 / (1 + i/12) )^n ]
+        // PMT - ежемес. выплата
+        // PV - сумма займа
+        // i - процентная ставка
+        // n - кол-во месяцев
+        $pmt = $loanSum * ($percent/100/12) / ( 1 - pow((1/(1+$percent/100/12)),$periodMonths) );
+        error_log("Loan payment monthly = $pmt");
+        return $pmt;
+    }
+
+    /* Расчет графика платежей по уже имеющимся займам  */
+    public function getPaymentMonthlyAll() {
+
+    }
+
+    private function getNextPaymentDate($referenceDate){
+        // referenceDate - стартовая дата. Текущая, либо каждая следующая на каждом шаге итерации
+        //$date = new DateTime("dd.mm.YY");
+        $newDate = $referenceDate->modify("+1 month");
+        error_log("Date in a month: " + $newDate->format("dd.mm.YY"));
+        return $newDate->format("dd.mm.YY");
+    }
+
+    public function getPaymentSchedule($period) {
+        /* получает на вход кол-во месяцев, на выходе - массив дат с шагом в месяц */
+        $datesArray = [];
+        $referenceDate = new DateTime("dd.mm.YY"); //текущая дата
+        for ($i = 0; $i < $period; $i++ ) {
+            $datesArray[i] = $this->getNextPaymentDate($referenceDate);
+            $referenceDate = $this->getNextPaymentDate($referenceDate);
+        }
+        return $datesArray;
+    }
 
 }
