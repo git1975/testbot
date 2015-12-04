@@ -222,10 +222,12 @@ abstract class TelegramBotChat {
   public function message($text, $message) {}
 
   protected function apiSendMessage($text, $params = array()) {
+    error_reporting("Method apiSendMessage");
     if (strcasecmp($text, '') === 0) {
       error_log("Got empty text param");
       $params += [
-          'chat_id' => $this->chatId
+          'chat_id' => $this->chatId,
+          'text'
       ];
     } else {
       $params += array(
