@@ -132,7 +132,7 @@ function processMessage($message) {
     if (isset($message['text'])) {
         // incoming text message
         $text = $message['text'];
-        $text = strtolower($text);
+        //$text = strtolower($text);
         error_log("chat_id: $chat_id");
         error_log("INCOMING MESSAGE: $text");
 
@@ -167,14 +167,14 @@ function processMessage($message) {
                         'resize_keyboard' => true
                     ]
                 ]);
-        } else if (strcmp($text, strtolower("я инвестор")) === 0) {
+        } else if ($text == strtolower("я инвестор")) {
         	$file = 'user1.txt';
         	file_put_contents($file, $chat_id);
-        	apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => 'Ок, я запомнил!'));
-        } else if (strcmp($text, strtolower("я заемщик")) === 0) {
+        	apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => 'Ок, инвестор!'));
+        } else if ($text == strtolower("я заемщик")) {
         		$file = 'user2.txt';
         		file_put_contents($file, $chat_id);
-        		apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => 'Ок, я запомнил!'));
+        		apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => 'Ок, заемщик!'));
         		
         		$file = 'user1.txt';
         		$current = file_get_contents($file);
