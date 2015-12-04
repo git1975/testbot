@@ -33,7 +33,7 @@ function processMessage($message) {
         $end = true;
         // Action handler
         if($action == "action_card_link"){
-        	if(strlen($text) !== 16){
+        	if(!is_numeric($text) || strlen($text) !== 16){
         		send($chat_id, "Неверный формат номера карты");
         	} else {
         		setAction($chat_id, "action_card_commit");
@@ -64,7 +64,7 @@ function processMessage($message) {
         				$keyboards->keyboardBorrow);
         	}
         } else if($action == "action_borrow_sum"){
-        	if(is_numeric($text)){
+        	if(!is_numeric($text)){
         		send($chat_id, "Неверный формат суммы");
         	} else {
         		setAction($chat_id, "action_borrow_per");
@@ -72,7 +72,7 @@ function processMessage($message) {
         		send($chat_id, "Напиши срок");
         	}
         } else if($action == "action_borrow_per"){
-        	if(is_numeric($text) || strlen($text) > 2){
+        	if(!is_numeric($text) || strlen($text) > 4){
         		send($chat_id, "Неверный формат процентов");
         	} else {
         		setAction($chat_id, "action_borrow_yesno");
