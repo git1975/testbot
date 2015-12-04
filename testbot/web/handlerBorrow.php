@@ -41,10 +41,8 @@ class HandlerBorrow {
         if ($action == "action_borrow") {
 			if ($text == 'Запросить займ') {
 				setAction ( $chat_id, "action_borrow_sum" );
-				//sendMsg ( $chat_id, "Напиши сумму, которую ты хочешь занять и срок. Я рассчитаю тебе сумму ежемесячного платежа. " . "Эта сумма будет автоматически списываться с твоего счета. При отсутствии на счете необходимой суммы " . "займ будет считаться просроченным и кредитор сможет инициировать взыскание" );
-
-                $this->sendAllMessages($chat_id, $msgs->loanInqMsg);
-				sendKeyboard ( $chat_id, "Сначала напиши сумму, например 20000", $keyboards->keyboardBorrow );
+				sendMsg ( $chat_id, $msgs->loanInqMsg[0]);
+				sendKeyboard ( $chat_id, $msgs->loanInqMsg[1], $keyboards->keyboardBorrow );
 			} else if ($text == "Данные по займам") {
                 setAction ( $chat_id, "action_borrow_loan_data");
                 sendKeyboard ( $chat_id, $msgs->takenLoansMsg, $keyboards->keyboardBorrow );
@@ -65,7 +63,7 @@ class HandlerBorrow {
 			} else {
 				setAction ( $chat_id, "action_borrow_per" );
 				setFileContent ( $chat_id, "borrowsum", $text );
-				sendMsg ( $chat_id, "Напиши срок" );
+				sendMsg ( $chat_id, $msgs->loanInqMsg[3] );
 			}
 
         } else if ($action == "action_borrow_per") {
