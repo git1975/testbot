@@ -34,5 +34,9 @@ class Keyboards {
     public $keyboardYesNo = [
         ['Да','Нет']
     ];
+    
+    public $keyboardBack = [
+    		['Назад']
+    ];
 
 }

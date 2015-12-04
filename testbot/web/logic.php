@@ -32,9 +32,6 @@ function processMessage($message) {
         error_log("---->>>>action: $action");
         
         $end = true;
-        if ($text === 'Назад' || $text === 'start') {
-        	sendStartScreen($chat_id, "");
-        }
         // Action handler
         if($action == "action_card_link"){
         	if(!is_numeric($text) || strlen($text) !== 16){
@@ -101,7 +98,11 @@ function processMessage($message) {
         if($end){
         	return;
         }
-
+        
+        if ($text === 'Назад' || $text === 'start') {
+        	sendStartScreen($chat_id, "");
+        }
+        
         // Root handler
         if ($text === 'Привязать карту') {        	
         	setAction($chat_id, "action_card_link");
