@@ -163,7 +163,8 @@ function processMessage($message) {
             apiRequestJson("sendMessage",
                 [
                     'chat_id' => $chat_id,
-                    'text' => 'lendscreen testing. Keyboard: '.implode($keyboards->keyboardLend),
+                    //'text' => 'lendscreen testing. Keyboard: '.implode($keyboards->keyboardLend),
+                    'text' => '',
                     'reply_markup' => [
                         'keyboard' => $keyboards->keyboardBorrow,
                         'one_time_keyboard' => true,
