@@ -144,10 +144,6 @@ function send($chat_id, $content){
 	apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => $content));
 }
 
-function sendStartScreen($chat_id){
-	sendStartScreen($chat_id, "");
-}
-
 function sendStartScreen($chat_id, $content){
 	if($content == ""){
 		$content = 'Start screen';
@@ -197,13 +193,15 @@ function processMessage($message) {
                 $randomCode = rand(1000, 9999);
                 apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => "Подтвердите секретный код ".$randomCode));
         		setFileContent($chat_id, "code", $randomCode);
-
+        		setFileContent($chat_id, "card_pre", $text);
         	}
         } else if($action == "action_card_commit"){
         	$content = getFileContent($chat_id, "code");
         	if (strcasecmp($text, $content) === 0) {
         		setAction($chat_id, "start");
         		sendStartScreen($chat_id, "Ваша карта привязана");
+         		$content = getFileContent($chat_id, "card_pre");
+       			setFileContent($chat_id, "card", $content);
         	} else {
         		send($chat_id, "Код неверный");
         	}
@@ -216,7 +214,7 @@ function processMessage($message) {
         }
 
         if (strcasecmp($text, "start") === 0 || strcasecmp($action, "start") === 0) {
-        	sendStartScreen($chat_id);
+        	sendStartScreen($chat_id, "");
         } else if (strcasecmp($text, "lend") === 0) {
             apiRequestJson("sendMessage",
                 [
