@@ -31,7 +31,7 @@ function processMessage($message) {
         error_log("---->>>>action: $action");
         
         $end = true;
-        
+        // Action handler
         if($action == "action_card_link"){
         	if(strlen($text) !== 16){
         		send($chat_id, "Неверный формат номера карты");
@@ -93,7 +93,21 @@ function processMessage($message) {
         	return;
         }
 
-        if (strcasecmp($text, "start") === 0 || strcasecmp($action, "start") === 0) {
+        // Root handler
+        if ($text === 'Привязать карту') {        	
+        	setAction($chat_id, "action_card_link");
+        	send($chat_id, $msgStart->linkCardMsg['enterCardNumberMsg']);
+        } else if ($text === 'Нет карты банка') {
+        	
+        } else if ($text === 'Инфо') {
+        	send($chat_id, $text);
+        } else if ($text === 'Взять в долг') {
+        	setAction($chat_id, "action_borrow");
+        	$msg = new MessagesBorrow();
+        	send($chat_id, $msg->launchMsg[0]);
+        	send($chat_id, $msg->launchMsg[1]);
+        	sendKeyboard($chat_id, $msg->launchMsg[2], $keyboards->keyboardBorrow);
+        } else if (strcasecmp($text, "start") === 0 || strcasecmp($action, "start") === 0) {
         	sendStartScreen($chat_id, "");
         } else if (strcasecmp($text, "lend") === 0) {
             apiRequestJson("sendMessage",
@@ -146,19 +160,6 @@ function processMessage($message) {
         } else if ($text === "пока") {
         		apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => 'До свидания!'));
         		//++++++++==============
-        } else if ($text === 'Привязать карту') {        	
-        	setAction($chat_id, "action_card_link");
-        	send($chat_id, $msgStart->linkCardMsg['enterCardNumberMsg']);
-        } else if ($text === 'Нет карты банка') {
-        	
-        } else if ($text === 'Инфо') {
-        	send($chat_id, $text);
-        } else if ($text === 'Взять в долг') {
-        	setAction($chat_id, "action_borrow");        	
-        	$msg = new MessagesBorrow();
-        	send($chat_id, $msg->launchMsg[0]);
-        	send($chat_id, $msg->launchMsg[1]);
-        	sendKeyboard($chat_id, $msg->launchMsg[2], $keyboards->keyboardBorrow);
         } else {
             apiRequestWebhook("sendMessage",
                 [
