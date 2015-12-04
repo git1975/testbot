@@ -28,7 +28,7 @@ class HandlerBorrow {
 
 
 		if ($text === 'Инфо') {
-            setAction ( $chat_id, "action_borrow_info" );
+            //setAction ( $chat_id, "action_borrow_info" );
             sendMsg($chat_id, $msgs->infoMsg[0]);
             sendKeyboard($chat_id, $msgs->infoMsg[1], $keyboards->keyboardBorrow);
             return;
