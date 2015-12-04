@@ -8,8 +8,17 @@ require_once 'MessagesStart.php';
  * Переход с главного экрана по нажатию "Привязать карту"
  */
 
-function getLinkCardMsg() {
-
+function getLinkCardMsg1() {
     $msgs = new MessagesStart();
-    return $msgs->linkCardMsg;
+    return $msgs->linkCardMsg[0];
+}
+
+function getLinkCardMsg2() {
+    $msgs = new MessagesStart();
+    return $msgs->linkCardMsg[1];
+}
+
+function getLinkCardMsg3() {
+    $msgs = new MessagesStart();
+    return $msgs->linkCardMsg[2];
 }
