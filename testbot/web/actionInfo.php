@@ -9,7 +9,6 @@ require_once 'MessagesStart.php';
  */
 
 function getInfoMsg() {
-
     $msgs = new MessagesStart();
     return $msgs->infoMsg;
 }

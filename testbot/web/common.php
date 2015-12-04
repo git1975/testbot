@@ -128,12 +128,14 @@ function setAction($chat_id, $action) {
 }
 
 function setFileContent($chat_id, $name, $content) {
-	$file = "$chat_id_$name.txt";
+	//$file = "$chat_id_$name.txt";
+    $file = $chat_id."_".$name.".txt";
 	file_put_contents($file, $content);
 }
 
 function getFileContent($chat_id, $name) {
-	$file = "$chat_id_$name.txt";
+	//$file = "$chat_id_$name.txt";
+    $file = $chat_id."_".$name.".txt";
 	$content = file_get_contents($file);
 	return $content;
 }
@@ -188,8 +190,10 @@ function processMessage($message) {
         		apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => "Неверный формат номера карты"));
         	} else {
         		setAction($chat_id, "action_card_commit");
-        		apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => "Подтвердите секретный код 1234"));
-        		setFileContent($chat_id, "code", "1234");
+                $randomCode = rand(1000, 9999);
+                apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => "Подтвердите секретный код".$randomCode));
+        		setFileContent($chat_id, "code", $randomCode);
+
         	}
         } else if($action == "action_card_commit"){
         	$content = getFileContent($chat_id, "code");
