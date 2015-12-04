@@ -222,6 +222,7 @@ function processMessage($message) {
         		setFileContent($chat_id, "card_pre", $text);
                 //send($chat_id, "Подтвердите секретный код ".$randomCode);
                 send($chat_id, $msgStart->linkCardMsg['smsSentMsg']);
+                send($chat_id, $randomCode);
         	}
         } else if($action == "action_card_commit"){
         	$content = getFileContent($chat_id, "code");
