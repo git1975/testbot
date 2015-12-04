@@ -132,7 +132,7 @@ function processMessage($message) {
     if (isset($message['text'])) {
         // incoming text message
         $text = $message['text'];
-        $text = strtolower($text);
+        $text = mb_strtolower($text);
         error_log("chat_id: $chat_id");
         error_log("INCOMING MESSAGE: $text");
 
@@ -171,7 +171,7 @@ function processMessage($message) {
         	$file = 'user1.txt';
         	file_put_contents($file, $chat_id);
         	apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => 'Ок, я запомнил!'));
-        } else if (strcmp(urlencode($text), urlencode("я заемщик")) === 0) {
+        } else if (mb_strtolower($text) === mb_strtolower("я заемщик")) {
         		$file = 'user2.txt';
         		file_put_contents($file, $chat_id);
         		apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => 'Ок, я запомнил!'));
