@@ -88,7 +88,7 @@ function processMessage($message) {
         				$keyboards->keyboardYesNo);
         	}
         } else */
-        if(strpos($action, "action_borrow")  !== false){
+        else if(strpos($action, "action_borrow")  !== false){
         	$handler = new HandlerBorrow();
         	$handler->handle($message);
         } else if(strpos($action, "action_lend") !== false){ 	
