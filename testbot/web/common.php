@@ -128,12 +128,12 @@ function setAction($chat_id, $action) {
 }
 
 function setFileContent($chat_id, $name, $content) {
-	$file = "$name_$chat_id.txt";
+	$file = "111.txt";
 	file_put_contents($file, $content);
 }
 
 function getFileContent($chat_id, $name) {
-	$file = "$name_$chat_id.txt";
+	$file = "111.txt";
 	$content = file_get_contents($file);
 	return $content;
 }
