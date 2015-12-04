@@ -228,7 +228,7 @@ function processMessage($message) {
         		setAction($chat_id, "start");
          		$content = getFileContent($chat_id, "card_pre");
        			setFileContent($chat_id, "card", $content);
-        		sendStartScreen($chat_id, "Ваша карта привязана");
+        		sendStartScreen($chat_id, $msgStart->linkCardMsg['registrationSuccessMsg']);
         	} else {
         		send($chat_id, "Код неверный");
         	}
