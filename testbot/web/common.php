@@ -132,7 +132,7 @@ function processMessage($message) {
     if (isset($message['text'])) {
         // incoming text message
         $text = $message['text'];
-        $text = strtolower($text, 'utf8');
+        $text = strtolower($text);
         error_log("chat_id: $chat_id");
         error_log("INCOMING MESSAGE: $text");
 
@@ -167,11 +167,11 @@ function processMessage($message) {
                         'resize_keyboard' => true
                     ]
                 ]);
-        } else if (strcmp($text, strtolower("я инвестор", 'utf8')) === 0) {
+        } else if (strcmp($text, strtolower("я инвестор")) === 0) {
         	$file = 'user1.txt';
         	file_put_contents($file, $chat_id);
         	apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => 'Ок, я запомнил!'));
-        } else if (strcmp($text, strtolower("я заемщик", 'utf8')) === 0) {
+        } else if (strcmp($text, strtolower("я заемщик")) === 0) {
         		$file = 'user2.txt';
         		file_put_contents($file, $chat_id);
         		apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => 'Ок, я запомнил!'));
@@ -179,9 +179,9 @@ function processMessage($message) {
         		$file = 'user1.txt';
         		$current = file_get_contents($file);
         		apiRequest("sendMessage", array('chat_id' => $current, "text" => 'Заемщик появился!'));
-        } else if (strcmp($text, strtolower("привет", 'utf8')) === 0) {
+        } else if (strcmp($text, strtolower("привет")) === 0) {
         	apiRequest("sendMessage", array('chat_id' => $current, "text" => 'Рад Вас видеть!'));
-        } else if ($text === strtolower("пока", 'utf8')) {
+        } else if ($text === strtolower("пока")) {
         		apiRequest("sendMessage", array('chat_id' => $current, "text" => 'До свидания!'));
         } else {
             apiRequestWebhook("sendMessage",
