@@ -3,19 +3,23 @@
 require_once 'baseHandler.php';
 
 class ActionBorrowYesno extends BaseHandler{
-	function ActionBorrowYesno($message){
-		self::$message = $message;
+
+    function ActionBorrowYesno($message){
+		$this->message = $message;
 		init();
 	}
 	
 	function handle() {
-		if($text == "Да"){
+
+
+		if($this->text == "Да"){
+            sendMsg($this->chat_id, 'You pressed Yes');
 		
-		} else if($text == "Нет"){
-		
+		} else if($this->text == "Нет"){
+            sendMsg($this->chat_id, 'You pressed No');
 		} else {
-			sendKeyboard($chat_id, "Ответьте Да или Нет",
-					$keyboards->keyboardYesNo);
+			sendKeyboard($this->chat_id, "Ответьте Да или Нет",
+					$this->keyboards->keyboardYesNo);
 		}
 	}
 }

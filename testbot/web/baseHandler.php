@@ -6,6 +6,7 @@ require_once 'MessagesLend.php';
 require_once 'actionInfo.php';
 require_once 'actionLinkCard.php';
 require_once 'actionNoCard.php';
+require_once 'telegram_io.php';
 
 class BaseHandler{
 	protected $message;
@@ -16,14 +17,14 @@ class BaseHandler{
 	protected $msgLend;
 	protected $message_id;
 	protected $chat_id;
-	
+
 	function init() {
 		$keyboards = new Keyboards;
 		$msgStart = new MessagesStart;
 		$msgBorrow = new MessagesBorrow;
 		$msgLend = new MessagesLend;
-		$message_id = $message['message_id'];
-		$chat_id = $message['chat']['id'];
-		$text = $message['text'];
+		$message_id = $this->message['message_id'];
+		$chat_id = $this->message['chat']['id'];
+		$text = $this->message['text'];
 	}
 }
