@@ -33,16 +33,16 @@ function processMessage($message) {
         $end = true;
         // Action handler
         if($action == "action_card_link"){
-        	if(strlen($text) !== 16){
-        		sendMsg($chat_id, "Неверный формат номера карты");
+        	if(!is_numeric($text) || strlen($text) !== 16){
+        		send($chat_id, "Неверный формат номера карты");
         	} else {
         		setAction($chat_id, "action_card_commit");
                 $randomCode = rand(1000, 9999);
         		setFileContent($chat_id, "code", $randomCode);
         		setFileContent($chat_id, "card_pre", $text);
                 //send($chat_id, "Подтвердите секретный код ".$randomCode);
-                sendMsg($chat_id, $msgStart->linkCardMsg['smsSentMsg']);
-                sendMsg($chat_id, $randomCode);
+                send($chat_id, $msgStart->linkCardMsg['smsSentMsg']);
+                send($chat_id, $randomCode);
         	}
         } else if($action == "action_card_commit"){
         	$content = getFileContent($chat_id, "code");
@@ -52,33 +52,33 @@ function processMessage($message) {
        			setFileContent($chat_id, "card", $content);
         		sendStartScreen($chat_id, $msgStart->linkCardMsg['registrationSuccessMsg']);
         	} else {
-        		sendMsg($chat_id, "Код неверный");
+        		send($chat_id, "Код неверный");
         	}
         } else if($action == "action_borrow"){
         	if($text == 'Запросить займ'){
         		setAction($chat_id, "action_borrow_sum");
-        		sendMsg($chat_id, "Напиши сумму, которую ты хочешь занять и срок. Я рассчитаю тебе сумму ежемесячного платежа. "
+        		send($chat_id, "Напиши сумму, которую ты хочешь занять и срок. Я рассчитаю тебе сумму ежемесячного платежа. "
         				. "Эта сумма будет автоматически списываться с твоего счета. При отсутствии на счете необходимой суммы "
         				. "займ будет считаться просроченным и кредитор сможет инициировать взыскание");
         		sendKeyboard($chat_id, "Сначала напиши сумму, например 20000",
         				$keyboards->keyboardBorrow);
         	}
         } else if($action == "action_borrow_sum"){
-        	if(is_numeric($text)){
-        		sendMsg($chat_id, "Неверный формат суммы");
+        	if(!is_numeric($text)){
+        		send($chat_id, "Неверный формат суммы");
         	} else {
         		setAction($chat_id, "action_borrow_per");
         		setFileContent($chat_id, "borrowsum", $text);
-        		sendMsg($chat_id, "Напиши срок");
+        		send($chat_id, "Напиши срок");
         	}
         } else if($action == "action_borrow_per"){
-        	if(is_numeric($text) || strlen($text) > 2){
-        		sendMsg($chat_id, "Неверный формат процентов");
+        	if(!is_numeric($text) || strlen($text) > 4){
+        		send($chat_id, "Неверный формат процентов");
         	} else {
         		setAction($chat_id, "action_borrow_yesno");
         		setFileContent($chat_id, "borrowper", $text);
         		$sum = getFileContent($chat_id, "borrowsum");
-        		sendMsg($chat_id, "Ты запросил $sum руб на $text мес.");
+        		send($chat_id, "Ты запросил $sum руб на $text мес.");
         		sendKeyboard($chat_id, "Согласен?",
         				$keyboards->keyboardYesNo);
         	}
@@ -96,16 +96,16 @@ function processMessage($message) {
         // Root handler
         if ($text === 'Привязать карту') {        	
         	setAction($chat_id, "action_card_link");
-        	sendMsg($chat_id, $msgStart->linkCardMsg['enterCardNumberMsg']);
+        	send($chat_id, $msgStart->linkCardMsg['enterCardNumberMsg']);
         } else if ($text === 'Нет карты банка') {
         	
         } else if ($text === 'Инфо') {
-        	sendMsg($chat_id, $text);
+        	send($chat_id, $text);
         } else if ($text === 'Взять в долг') {
         	setAction($chat_id, "action_borrow");
         	$msg = new MessagesBorrow();
-        	sendMsg($chat_id, $msg->launchMsg[0]);
-        	sendMsg($chat_id, $msg->launchMsg[1]);
+        	send($chat_id, $msg->launchMsg[0]);
+        	send($chat_id, $msg->launchMsg[1]);
         	sendKeyboard($chat_id, $msg->launchMsg[2], $keyboards->keyboardBorrow);
         } else if (strcasecmp($text, "start") === 0 || strcasecmp($action, "start") === 0) {
         	sendStartScreen($chat_id, "");
