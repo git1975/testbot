@@ -8,5 +8,9 @@
  */
 class WSClient{
 
+ function test(){
+     $soapClient = new SoapClient("http://www.webservicex.com/globalweather.asmx?WSDL");
 
+
+ }
 }
