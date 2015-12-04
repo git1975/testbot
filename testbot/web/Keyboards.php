@@ -30,4 +30,8 @@ class Keyboards {
         ['График выплат', 'Данные по займам']
     ];
 
+    public $keyboardYesNo = [
+        ['Да','Нет']
+    ];
+
 }
