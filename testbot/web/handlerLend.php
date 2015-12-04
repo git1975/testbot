@@ -48,7 +48,7 @@ class HandlerLend {
 			while(!feof($file)){
 				$line = fgets($file);
 				$pieces = explode(";", $borrowers);
-				$s = $s."Сумма=".$pieces[1]." на срок ".$pieces[2]." мес./n";
+				$s = $s."Сумма=".$pieces[1]." на срок ".$pieces[2]." мес.\r\n";
 			}
 			fclose($file);
 			
