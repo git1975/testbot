@@ -26,7 +26,9 @@ class HandlerLend {
 			sendKeyboard($chat_id, "Выберите действие", $keyboards->keyboardLend);
 		}
 			
-		if($action == "action_lend_sum"){
+		if($action == "action_lend"){
+			sendKeyboard($chat_id, "Выберите действие", $keyboards->keyboardLend);
+		} else if($action == "action_lend_sum"){
 			if(!is_numeric($text)){
 				sendMsg($chat_id, "Неверный формат суммы");
 			} else {
