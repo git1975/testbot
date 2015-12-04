@@ -44,5 +44,4 @@ class PaymentLogic {
         }
         return $datesArray;
     }
-
 }

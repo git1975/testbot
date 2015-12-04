@@ -1,5 +1,5 @@
 <?php
-include_once 'PaymentLogic.php';
+include_once 'paymentLogic.php';
 include_once 'RiskLogic.php';
 /**
  * Created by PhpStorm.
