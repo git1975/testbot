@@ -120,7 +120,8 @@ function apiRequestJson($method, $parameters) {
 }
 
 function processMessage($message) {
-
+	//setlocale(LC_ALL, 'ru_RU.UTF-8');
+	
     $keyboards = new Keyboards;
     $msgStart = new MessagesStart;
     $msgBorrow = new MessagesBorrow;
@@ -171,11 +172,11 @@ function processMessage($message) {
                         'resize_keyboard' => true
                     ]
                 ]);
-        } else if ($text == strtolower("я инвестор")) {
+        } else if ($text == "я инвестор") {
         	$file = 'user1.txt';
         	file_put_contents($file, $chat_id);
         	apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => 'Ок, инвестор!'));
-        } else if (strcasecmp($text, strtolower("я заемщик")) === 0) {
+        } else if ($text == "я заемщик") {
         		$file = 'user2.txt';
         		file_put_contents($file, $chat_id);
         		apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => 'Ок, заемщик!'));
@@ -183,10 +184,10 @@ function processMessage($message) {
         		$file = 'user1.txt';
         		$current = file_get_contents($file);
         		apiRequest("sendMessage", array('chat_id' => $current, "text" => 'Заемщик появился!'));
-        } else if (strcmp($text, strtolower("привет")) === 0) {
-        	apiRequest("sendMessage", array('chat_id' => $current, "text" => 'Рад Вас видеть!'));
-        } else if ($text === strtolower("пока")) {
-        		apiRequest("sendMessage", array('chat_id' => $current, "text" => 'До свидания!'));
+        } else if ($text == "привет") {
+        	apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => 'Рад Вас видеть!'));
+        } else if ($text === "пока") {
+        		apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => 'До свидания!'));
         } else {
             apiRequestWebhook("sendMessage",
                 [
