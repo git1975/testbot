@@ -33,7 +33,7 @@ class HandlerBorrow {
             sendKeyboard($chat_id, $msgs->infoMsg[1], $keyboards->keyboardBorrow);
             return;
 		} else if ($text === 'Назад') {
-            //setAction($chat_id, "borrow_go_back");
+            setAction($chat_id, "borrow_go_back");
             return;
 		}
 		
