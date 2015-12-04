@@ -48,12 +48,14 @@ class HandlerLend {
 			while(!feof($file)){
 				$line = fgets($file);
 				$pieces = explode(";", $line);
-				$s = $s.$pieces[3]." на сумму=".$pieces[1]." на срок ".$pieces[2]." мес.\r\n";
+				if($pieces[1] !== ""){
+					$s = $s.$pieces[3]." на сумму ".$pieces[1]." руб. на срок ".$pieces[2]." мес.\r\n";
+				}
 			}
 			fclose($file);
 			
 			$s = $s."...\r\n";
-			$s = $s."01.12.2015 на сумму=300 на срок 3 мес.\r\n";
+			$s = $s."01.12.2015 на сумму 300 руб. на срок 3 мес.\r\n";
 			
 			//$pieces = explode(" ", $borrowers);
 			
