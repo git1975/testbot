@@ -102,7 +102,7 @@ class HandlerBorrow {
                 $sum = getFileContent ( $chat_id, "borrowsum" );
                 $per = getFileContent ( $chat_id, "borrowper" );
                 
-                $str = $chat_id . ";" . $sum . ";" . $per . ";";
+                $str = $chat_id . ";" . $sum . ";" . $per . ";06.12.2015;";
                 addFileContent ( "borrowers", $str );
                 
                 error_log("--->>>action_borrow_yesno lender: $lender $sum");
