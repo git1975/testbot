@@ -42,13 +42,13 @@ class HandlerLend {
 		} else if ($text == 'Выданные займы') {
 			setAction ( $chat_id, "action_lend_info" );
 						
-			$borrowers = getFileContent2("borrowers");	
+			//$borrowers = getFileContent2("borrowers");	
 			$s = "";
 			$file = fopen("borrowers.txt", "r");
 			while(!feof($file)){
 				$line = fgets($file);
-				$pieces = explode(";", $borrowers);
-				$s = $s."Сумма=".$pieces[1]." на срок ".$pieces[2]." мес.\r\n";
+				$pieces = explode(";", $line);
+				$s = $s.$pieces[3]." на сумму=".$pieces[1]." на срок ".$pieces[2]." мес.\r\n";
 			}
 			fclose($file);
 			
