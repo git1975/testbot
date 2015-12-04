@@ -144,6 +144,10 @@ function send($chat_id, $content){
 	apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => $content));
 }
 
+function sendStartScreen($chat_id){
+	sendStartScreen($chat_id, "");
+}
+
 function sendStartScreen($chat_id, $content){
 	if($content == ""){
 		$content = 'Start screen';
@@ -191,13 +195,12 @@ function processMessage($message) {
         	} else {
         		setAction($chat_id, "action_card_commit");
                 $randomCode = rand(1000, 9999);
-                apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => "Подтвердите секретный код".$randomCode));
+                apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => "Подтвердите секретный код ".$randomCode));
         		setFileContent($chat_id, "code", $randomCode);
 
         	}
         } else if($action == "action_card_commit"){
         	$content = getFileContent($chat_id, "code");
-        	//error_log("---->>>>action_card_code: $content");
         	if (strcasecmp($text, $content) === 0) {
         		setAction($chat_id, "start");
         		sendStartScreen($chat_id, "Ваша карта привязана");
@@ -213,16 +216,7 @@ function processMessage($message) {
         }
 
         if (strcasecmp($text, "start") === 0 || strcasecmp($action, "start") === 0) {
-            apiRequestJson("sendMessage",
-                [
-                    'chat_id' => $chat_id,
-                    'text' => 'Start screen',
-                    'reply_markup' => [
-                        'keyboard' => $keyboards->keyboardStart,
-                        'one_time_keyboard' => true,
-                        'resize_keyboard' => true
-                    ]
-                ]);
+        	sendStartScreen($chat_id);
         } else if (strcasecmp($text, "lend") === 0) {
             apiRequestJson("sendMessage",
                 [
