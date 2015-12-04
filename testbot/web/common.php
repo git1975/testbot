@@ -142,6 +142,23 @@ function send($chat_id, $content){
 	apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => $content));
 }
 
+function sendStartScreen($chat_id, $content){
+	if($content == ""){
+		$content = 'Start screen';
+	}
+	$keyboards = new Keyboards;
+	 apiRequestJson("sendMessage",
+                [
+                    'chat_id' => $chat_id,
+                    'text' => $content,
+                    'reply_markup' => [
+                        'keyboard' => $keyboards->keyboardStart,
+                        'one_time_keyboard' => true,
+                        'resize_keyboard' => true
+                    ]
+                ]);
+}
+
 function processMessage($message) {
 	//setlocale(LC_ALL, 'ru_RU.UTF-8');
 
@@ -176,10 +193,10 @@ function processMessage($message) {
         	}
         } else if($action == "action_card_commit"){
         	$content = getFileContent($chat_id, "code");
-        	error_log("---->>>>action_card_code: $content");
+        	//error_log("---->>>>action_card_code: $content");
         	if (strcasecmp($text, $content) === 0) {
         		setAction($chat_id, "start");
-        		send($chat_id, "Ваша карта привязана");
+        		sendStartScreen($chat_id, "Ваша карта привязана");
         	} else {
         		send($chat_id, "Код неверный");
         	}
