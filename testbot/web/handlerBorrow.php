@@ -1,6 +1,7 @@
 <?php
 require_once 'MessagesBorrow.php';
 require_once 'Keyboards.php';
+require_once 'telegram_io.php';
 
 /**
  * Created by PhpStorm.
@@ -10,18 +11,20 @@ require_once 'Keyboards.php';
  */
 class HandlerBorrow
 {
-
     function HandlerBorrow() {
     }
+
+
     function handle($message) {
         $chat_id = $message['chat']['id'];
         $text = $message['text'];
         $kb = new Keyboards();
-        if ($text === 'Узнать ставку') {
-            setAction ( $chat_id, "action_ask_rating" );
-            $msg = new MessagesBorrow();
-            // в зависимости от рейтинга выбирать сообщение из массива
-            sendKeyboard ( $chat_id, $msg->ratingMsg[0], $kb->key );
+        $action = getAction($chat_id);
+
+        if ($text === 'Инфо') {
+
+        } else if ($text === '') {
+
         }
     }
 
