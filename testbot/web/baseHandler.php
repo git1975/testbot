@@ -9,10 +9,6 @@ class BaseHandler{
 	protected $message_id;
 	protected $chat_id;
 	
-	function ActionBorrowYesno($message){
-		self::$message = $message;
-	}
-	
 	function init() {
 		$keyboards = new Keyboards;
 		$msgStart = new MessagesStart;
