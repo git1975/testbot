@@ -220,7 +220,8 @@ function processMessage($message) {
                 $randomCode = rand(1000, 9999);
         		setFileContent($chat_id, "code", $randomCode);
         		setFileContent($chat_id, "card_pre", $text);
-                send($chat_id, "Подтвердите секретный код ".$randomCode);
+                //send($chat_id, "Подтвердите секретный код ".$randomCode);
+                send($chat_id, $msgStart->linkCardMsg['smsSentMsg']);
         	}
         } else if($action == "action_card_commit"){
         	$content = getFileContent($chat_id, "code");
@@ -295,7 +296,7 @@ function processMessage($message) {
         		//++++++++==============
         } else if ($text === 'Привязать карту') {        	
         	setAction($chat_id, "action_card_link");
-        	send($chat_id, "Введите номер карты");
+        	send($chat_id, $msgStart->linkCardMsg['enterCardNumberMsg']);
         } else if ($text === 'Нет карты банка') {
         	
         } else if ($text === 'Инфо') {
