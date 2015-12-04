@@ -13,8 +13,9 @@ class ActionBorrowYesNo extends BaseHandler{
 	
 	function handle() {
         $kb = new Keyboards();
+        error_log("---->>>> function handle(): chat_id=$this->chat_id");
 		if($this->text == "Да"){
-            error_log("---->>>> function handle(): chat_id=$this->chat_id");
+
             sendKeyboard($this->chat_id, "Поздравляем! Вы успешно Вы оформили займ.",$kb->keyboardBorrow);
 
 		} else if($this->text == "Нет"){
