@@ -175,7 +175,7 @@ function processMessage($message) {
         	$file = 'user1.txt';
         	file_put_contents($file, $chat_id);
         	apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => 'Ок, инвестор!'));
-        } else if (mb_strtolower($text) == mb_strtolower("я заемщик")) {
+        } else if (strtolower($text) == strtolower("я заемщик")) {
         		$file = 'user2.txt';
         		file_put_contents($file, $chat_id);
         		apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => 'Ок, заемщик!'));
