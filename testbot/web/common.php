@@ -184,9 +184,9 @@ function processMessage($message) {
         		$current = file_get_contents($file);
         		apiRequest("sendMessage", array('chat_id' => $current, "text" => 'Заемщик появился!'));
         } else if ($text == "привет") {
-        	apiRequest("sendMessage", array('chat_id' => $current, "text" => 'Рад Вас видеть!'));
+        	apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => 'Рад Вас видеть!'));
         } else if ($text === "пока") {
-        		apiRequest("sendMessage", array('chat_id' => $current, "text" => 'До свидания!'));
+        		apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => 'До свидания!'));
         } else {
             apiRequestWebhook("sendMessage",
                 [
