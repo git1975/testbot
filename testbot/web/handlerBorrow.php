@@ -11,25 +11,50 @@ require_once 'actionBorrowYesno.php';
  * Time: 20:23
  */
 class HandlerBorrow {
+    //TODO до кнопок да и нет должно выводиться сообщение с графиком платежей
 	function handle($message) {
 		$chat_id = $message ['chat'] ['id'];
 		$text = $message ['text'];
 		$keyboards = new Keyboards ();
 		$action = getAction ( $chat_id );
-		
+        $msgs = new MessagesBorrow();
+
+        setAction($chat_id, "borrow_payment_schedule");
+        setAction($chat_id, "borrow_loan_data");
+        setAction($chat_id, "borrow_debt_remaining");
+        setAction($chat_id, "borrow_ask_rating");
+
+
 		if ($text === 'Инфо') {
-			return;
-		} else if ($text === '') {
-			return;
+            setAction ( $chat_id, "action_borrow_info" );
+            sendKeyboard($chat_id, $msgs->infoMsg, $keyboards->keyboardBorrow);
+            return;
+		} else if ($text === 'Назад') {
+            //setAction($chat_id, "borrow_go_back");
+            return;
 		}
 		
-		if ($action == "action_borrow") {
+
+        if ($action == "action_borrow") {
 			if ($text == 'Запросить займ') {
 				setAction ( $chat_id, "action_borrow_sum" );
 				sendMsg ( $chat_id, "Напиши сумму, которую ты хочешь занять и срок. Я рассчитаю тебе сумму ежемесячного платежа. " . "Эта сумма будет автоматически списываться с твоего счета. При отсутствии на счете необходимой суммы " . "займ будет считаться просроченным и кредитор сможет инициировать взыскание" );
 				sendKeyboard ( $chat_id, "Сначала напиши сумму, например 20000", $keyboards->keyboardBorrow );
-			}
-		} else if ($action == "action_borrow_sum") {
+			} else if ($text == "Данные по займам") {
+                setAction($chat_id, "action_borrow");
+                sendKeyboard ( $chat_id, $msgs->takenLoansMsg, $keyboards->keyboardBorrow );
+            } else if ($text == "Узнать ставку") {
+                setAction($chat_id, "action_borrow");
+                sendKeyboard ( $chat_id, $msgs->ratingMsg, $keyboards->keyboardBorrow );
+            } else if ($text == "График платежей") {
+                setAction($chat_id, "action_borrow");
+                sendKeyboard ( $chat_id, $msgs->payScheduleMsg, $keyboards->keyboardBorrow );
+            } else if ($text == "Остаток долга") {
+                setAction($chat_id, "action_borrow");
+                sendKeyboard ( $chat_id, $msgs->debtRemainMsg, $keyboards->keyboardBorrow );
+            }
+
+        } else if ($action == "action_borrow_sum") {
 			if (! is_numeric ( $text )) {
 				sendMsg ( $chat_id, "Неверный формат суммы" );
 			} else {
@@ -37,7 +62,8 @@ class HandlerBorrow {
 				setFileContent ( $chat_id, "borrowsum", $text );
 				sendMsg ( $chat_id, "Напиши срок" );
 			}
-		} else if ($action == "action_borrow_per") {
+
+        } else if ($action == "action_borrow_per") {
 			if (! is_numeric ( $text ) || strlen ( $text ) > 4) {
 				sendMsg ( $chat_id, "Неверный формат процентов" );
 			} else {
@@ -47,9 +73,13 @@ class HandlerBorrow {
 				sendMsg ( $chat_id, "Ты запросил $sum руб на $text мес." );
 				sendKeyboard ( $chat_id, "Согласен?", $keyboards->keyboardYesNo );
 			}
-		} else if ($action == "action_borrow_yesno") {
+
+        } else if ($action == "action_borrow_yesno") {
 			if ($text == "Да") {
 				setAction ( $chat_id, "action_borrow" );
+                $lender = getFileContent($chat_id, "lender");
+                $sum = getFileContent ( $chat_id, "borrowsum" );
+                sendMsg($lender, "Заемщик списал сумму $sum");
 				sendKeyboard ( $chat_id, "Поздравляем! Вы успешно Вы оформили займ.", $keyboards->keyboardBorrow );
 			} else if ($text == "Нет") {
 				setAction ( $chat_id, "action_borrow" );
@@ -57,6 +87,18 @@ class HandlerBorrow {
 			} else {
 				sendKeyboard ( $chat_id, "Ответьте Да или Нет", $keyboards->keyboardYesNo );
 			}
-		}
+
+        } else if ($action == "action_borrow_payment_schedule") {
+            //TODO тут вроде нет никаких действий
+
+        } else if ($action == "action_borrow_loan_data") {
+            //TODO тут вроде нет никаких действий
+
+        } else if ($action == "action_borrow_debt_remaining") {
+            //TODO тут вроде нет никаких действий
+
+        } else if ($action == "action_borrow_ask_rating") {
+            //TODO тут вроде нет никаких действий
+        }
 	}
 }
