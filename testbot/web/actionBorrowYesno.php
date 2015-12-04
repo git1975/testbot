@@ -1,4 +1,7 @@
 <?php
+
+require_once 'baseHandler.php';
+
 class ActionBorrowYesno extends BaseHandler{
 	function ActionBorrowYesno($message){
 		self::$message = $message;
