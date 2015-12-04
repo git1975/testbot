@@ -142,7 +142,7 @@ function getFileContent($chat_id, $name) {
 
 function isCardLinked($chat_id){
 	$content = getFileContent($chat_id, "card");
-	if(strlen($content) !== 16){
+	if(strlen($content) === 16){
 		return true;
 	} else {
 		return false;
