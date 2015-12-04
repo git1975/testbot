@@ -23,7 +23,7 @@ class HandlerLend {
 			return;
 		} else if ($text == 'Аналитика') {
 			setAction ( $chat_id, "action_lend" );
-			addFileContent("borrowers", "qqqqq");
+			//addFileContent("borrowers", "qqqqq");
 			sendKeyboard ( $chat_id, $content, $keyboards->keyboardBack );
 			return;
 		} else if ($text == 'Инфо') {

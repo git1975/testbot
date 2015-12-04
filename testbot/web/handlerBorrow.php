@@ -90,7 +90,7 @@ class HandlerBorrow {
                 $per = getFileContent ( $chat_id, "borrowper" );
                 
                 $str = $chat_id . ";" . $sum . ";" . $per . ";";
-                addFileContent ( $chat_id, "borrowers", $str );
+                addFileContent ( "borrowers", $str );
                 
                 sendMsg($lender, "Заемщик списал сумму $sum");
 				sendKeyboard ( $chat_id, "Поздравляем! Вы успешно оформили займ.", $keyboards->keyboardBorrow );
