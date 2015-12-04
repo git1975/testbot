@@ -128,12 +128,12 @@ function setAction($chat_id, $action) {
 }
 
 function setFileContent($chat_id, $name, $content) {
-	$file = "111.txt";
+	$file = "$chat_id_$name.txt";
 	file_put_contents($file, $content);
 }
 
 function getFileContent($chat_id, $name) {
-	$file = "111.txt";
+	$file = "$chat_id_$name.txt";
 	$content = file_get_contents($file);
 	return $content;
 }
@@ -175,7 +175,7 @@ function processMessage($message) {
         		setFileContent($chat_id, "code", "1234");
         	}
         } else if($action == "action_card_commit"){
-        	$content = setFileContent($chat_id, "code");
+        	$content = getFileContent($chat_id, "code");
         	error_log("---->>>>action_card_code: $content");
         	if (strcasecmp($text, $content) === 0) {
         		setAction($chat_id, "start");
