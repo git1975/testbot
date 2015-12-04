@@ -2,6 +2,7 @@
 require_once 'MessagesBorrow.php';
 require_once 'Keyboards.php';
 require_once 'telegram_io.php';
+require_once 'actionBorrowYesno.php';
 
 /**
  * Created by PhpStorm.
