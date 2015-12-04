@@ -72,6 +72,7 @@ function processMessage($message) {
         }
         
         if ($text === 'Назад' || $text === 'start') {
+        	setAction($chat_id, "");
         	sendStartScreen($chat_id, "");
         }
         
