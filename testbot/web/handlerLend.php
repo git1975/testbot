@@ -1,9 +1,10 @@
 <?php
 
 class HandlerLend {
-	function HandlerLend() {
-	}
 	function handle() {
+		$chat_id = $message['chat']['id'];
+		$text = $message['text'];
+		
 		if ($text === 'Дать в долг') {
 			setAction ( $chat_id, "action_lend" );
 			$msg = new MessagesLend ();
