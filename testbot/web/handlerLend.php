@@ -9,11 +9,11 @@ class HandlerLend {
 		$keyboards = new Keyboards ();
 		$action = getAction($chat_id);
 		
-		if ($text == 'Разместить сумму') {
+		if ($text === 'Разместить сумму') {
 			setAction ( $chat_id, "action_lend_sum" );
 			sendMsg ( $chat_id, "Напиши сумму инвестиций. Например, 5000" );
 			return;
-		} else if ($text == 'Назад') {
+		} else if ($text === 'Назад') {
 			if($action == "action_lend"){
 				setAction ( $chat_id, "-" );
 				sendStartScreen($chat_id, "Start Screen");
@@ -22,16 +22,16 @@ class HandlerLend {
 				sendKeyboard ( $chat_id, "Выберите действие", $keyboards->keyboardLend );
 			}
 			return;
-		} else if ($text == 'Дать в долг') {
+		} else if ($text === 'Дать в долг') {
 			setAction ( $chat_id, "action_lend" );
 			sendKeyboard ( $chat_id, "Выберите действие", $keyboards->keyboardLend );
 			return;
-		} else if ($text == 'Аналитика') {
+		} else if ($text === 'Аналитика') {
 			setAction ( $chat_id, "action_lend" );
 			//addFileContent("borrowers", "qqqqq");
 			sendKeyboard ( $chat_id, $content, $keyboards->keyboardBack );
 			return;
-		} else if ($text == 'Инфо') {
+		} else if ($text === 'Инфо') {
 			setAction ( $chat_id, "action_lend_info" );
 			
 			$content = getFileContent2("borrowers");
@@ -39,7 +39,7 @@ class HandlerLend {
 			//sendKeyboard ( $chat_id, "Вы инвестировали:1) 16.01.2015 - 10 000 руб. Из них выдано для:-)16.01.2015 | Смирнов А.В. (id 12345) | 500 руб. | Остат 389 руб. | Рейт. B | Став. 20% | Займ 100 000 руб.-)16.01.2015 | Иванов С.В. (id 23453) | 500 руб. | Остат 356 руб. | Рейт. C | Став. 30% | Займ 50 000 руб.-)17.01.2015 | Симонов М.К. (id 74473) | 500 руб. | Остат 389 руб. | Рейт. C | Став. 30% | Займ 30 000 руб", $keyboards->keyboardBack );
 			sendKeyboard ( $chat_id, $content, $keyboards->keyboardBack );
 			return;
-		} else if ($text == 'Выданные займы') {
+		} else if ($text === 'Выданные займы') {
 			setAction ( $chat_id, "action_lend_info" );
 						
 			//$borrowers = getFileContent2("borrowers");	
@@ -65,7 +65,16 @@ class HandlerLend {
 			sendKeyboard ( $chat_id, $text, $keyboards->keyboardBack );
 			return;
 		} else if ($text == 'Подать на взыскание') {
-			sendKeyboard ( $chat_id, $text, $keyboards->keyboardBack );
+			$file = fopen("borrowers.txt", "r");
+			while(!feof($file)){
+				$line = fgets($file);
+				$pieces = explode(";", $line);
+				$id = $pieces[0];
+				sendMsg ( $id, "Господа! Инвестор требует вернуть долг!");
+			}
+			fclose($file);
+			
+			sendKeyboard ( $chat_id, "Сообщения должникам отправлены", $keyboards->keyboardBack );
 		}
 			
 		if($action == "action_lend_sum"){
