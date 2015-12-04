@@ -32,7 +32,7 @@ class HandlerLend {
 		} else if($action == "action_lend_sumyesno"){
 			if($text == "Да"){
 				$sum = getFileContent($chat_id, "lendsum");
-				sendKeyboard($chat_id, "Вы инвестировали $sum руб. Следите за аналитикой", $keyboards->keyboardBorrow);
+				sendKeyboard($chat_id, "Вы инвестировали $sum руб. Следите за аналитикой", $keyboards->keyboardLend);
 			} else if($text == "Нет"){
 				setAction($chat_id, "action_lend_sum");
 				sendKeyboard ( $chat_id, "Напиши сумму инвестиций. Например, 5000" );
