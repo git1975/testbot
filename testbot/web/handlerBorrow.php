@@ -33,7 +33,7 @@ class HandlerBorrow {
             sendKeyboard($chat_id, $msgs->infoMsg[1], $keyboards->keyboardBorrow);
             return;
 		} else if ($text === 'Назад') {
-            //setAction($chat_id, "borrow_go_back");
+            setAction($chat_id, "borrow_go_back");
             return;
 		}
 		
@@ -44,16 +44,12 @@ class HandlerBorrow {
 				sendMsg ( $chat_id, $msgs->loanInqMsg[0]);
 				sendKeyboard ( $chat_id, $msgs->loanInqMsg[1], $keyboards->keyboardBorrow );
 			} else if ($text == "Данные по займам") {
-                setAction ( $chat_id, "action_borrow_loan_data");
                 sendKeyboard ( $chat_id, $msgs->takenLoansMsg, $keyboards->keyboardBorrow );
             } else if ($text == "Узнать ставку") {
-                setAction ( $chat_id, action_borrow_ask_rating);
                 sendKeyboard ( $chat_id, $msgs->ratingMsg[0], $keyboards->keyboardBorrow );
             } else if ($text == "График платежей") {
-                setAction ( $chat_id, action_borrow_payment_schedule);
                 sendKeyboard ( $chat_id, $msgs->payScheduleMsg, $keyboards->keyboardBorrow );
             } else if ($text == "Остаток долга") {
-                setAction ( $chat_id,"action_borrow_debt_remaining");
                 sendKeyboard ( $chat_id, $msgs->debtRemainMsg, $keyboards->keyboardBorrow );
             }
 
