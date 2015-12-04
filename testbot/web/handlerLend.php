@@ -18,10 +18,23 @@ class HandlerLend {
 			if(!is_numeric($text)){
 				sendMsg($chat_id, "Неверный формат суммы");
 			} else {
-				setAction($chat_id, "action_lend_sum_ok");
+				setAction($chat_id, "action_lend_sumyesno");
 				setFileContent($chat_id, "lendsum", $text);
-				sendMsg($chat_id, "Сумма принята");
+				sendKeyboard($chat_id, "Ты инвестируешь $text руб. Надиши Да, если согласен или Нет, если хочешь изменить сумму",
+						$keyboards->keyboardYesNo);
 			}
+		} else if($action == "action_lend_sumyesno"){
+			if($text == "Да"){
+				$sum = getFileContent($chat_id, "lendsum");
+				sendKeyboard($chat_id, "Вы инвестировали $sum руб. Следите за Аналитокой", $keyboards->keyboardBorrow);
+			} else if($text == "Нет"){
+				setAction($chat_id, "action_lend_sum");
+				sendKeyboard ( $chat_id, "Напиши сумму инвестиций. Например, 5000", $keyboards->keyboardLend );
+			} else {
+				sendKeyboard($chat_id, "Ответьте Да или Нет",
+						$kb->keyboardYesNo);
+			}
+			sendMsg($chat_id, "Сумма принята");
 		}
 	}
 }
