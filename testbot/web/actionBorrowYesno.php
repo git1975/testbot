@@ -2,11 +2,11 @@
 
 require_once 'baseHandler.php';
 
-class ActionBorrowYesno extends BaseHandler{
+class ActionBorrowYesNo extends BaseHandler{
 
-    function ActionBorrowYesno($message){
+    function ActionBorrowYesNo($message){
 		$this->message = $message;
-		init();
+		$this->init();
 	}
 	
 	function handle() {
