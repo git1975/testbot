@@ -83,8 +83,8 @@ function processMessage($message) {
         				$keyboards->keyboardYesNo);
         	}
         } else if($action == "action_borrow_yesno"){
-        	$hander = new ActionBorrowYesNo($message);
-        	$hander.handle();
+        	$handler = new ActionBorrowYesNo($message);
+        	$handler->handle();
         } else {
         	$end = false;
         }
