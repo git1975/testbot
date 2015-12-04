@@ -1,6 +1,6 @@
 <?php
 
-require_once 'common.php';
+//require_once 'common.php';
 
 error_log('index.php started');
 
@@ -13,7 +13,8 @@ if (!$update) {
 }
 
 if ( isset($update["message"]) ) {
-    processMessage($update["message"]);
+    $logic = new Logic();
+    $logic->processMessage($update["message"]);
 }
 
 processMessage("Start");
