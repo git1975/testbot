@@ -141,7 +141,7 @@ function setFileContent($chat_id, $name, $content) {
 function addFileContent($name, $content) {
 	$file = "$name.txt";
 	error_log("--->>>addFileContent : $file $content");
-	file_put_contents($file, "$content");//, FILE_APPEND
+	file_put_contents($file, "$content", FILE_APPEND);//
 }
 
 function getFileContent($chat_id, $name) {
