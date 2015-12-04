@@ -46,16 +46,16 @@ class HandlerBorrow {
                 $this->sendAllMessages($chat_id, $msgs->loanInqMsg);
 				sendKeyboard ( $chat_id, "Сначала напиши сумму, например 20000", $keyboards->keyboardBorrow );
 			} else if ($text == "Данные по займам") {
-                setAction($chat_id, "action_borrow");
+                setAction ( $chat_id, "action_borrow_loan_data");
                 sendKeyboard ( $chat_id, $msgs->takenLoansMsg, $keyboards->keyboardBorrow );
             } else if ($text == "Узнать ставку") {
-                setAction($chat_id, "action_borrow");
+                setAction ( $chat_id, action_borrow_ask_rating);
                 sendKeyboard ( $chat_id, $msgs->ratingMsg, $keyboards->keyboardBorrow );
             } else if ($text == "График платежей") {
-                setAction($chat_id, "action_borrow");
+                setAction ( $chat_id, action_borrow_payment_schedule);
                 sendKeyboard ( $chat_id, $msgs->payScheduleMsg, $keyboards->keyboardBorrow );
             } else if ($text == "Остаток долга") {
-                setAction($chat_id, "action_borrow");
+                setAction ( $chat_id,"action_borrow_debt_remaining");
                 sendKeyboard ( $chat_id, $msgs->debtRemainMsg, $keyboards->keyboardBorrow );
             }
 
