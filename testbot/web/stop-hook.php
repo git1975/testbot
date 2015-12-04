@@ -5,4 +5,4 @@ apiRequest('setWebhook', array('url' => ''));
 
 echo "setWebhook Stoped";
 
-return "setWebhook Stoped";
+return json_encode(array('result' => "setWebhook Stoped"));
