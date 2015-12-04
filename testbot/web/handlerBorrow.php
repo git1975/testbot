@@ -80,6 +80,8 @@ class HandlerBorrow {
         } else if ($action == "action_borrow_per") {
 			if (! is_numeric ( $text ) || strlen ( $text ) > 4) {
 				sendMsg ( $chat_id, "Неверный формат процентов" );
+			} else if(is_numeric ( $text ) && intval($text) < 500){
+				sendMsg ( $chat_id, "Сумма не может быть менее 500 руб." );
 			} else {
 				setAction ( $chat_id, "action_borrow_yesno" );
 				setFileContent ( $chat_id, "borrowper", $text );
@@ -106,7 +108,7 @@ class HandlerBorrow {
                 addFileContent ( "borrowers", $str );
                 
                 error_log("--->>>action_borrow_yesno lender: $lender $sum");
-                sendMsg($lender, "Заемщик списал сумму $sum");
+                sendMsg($lender, "Заемщик списал сумму 500 руб.");
 				sendKeyboard ( $chat_id, "Поздравляем! Вы успешно оформили займ.", $keyboards->keyboardBorrow );
 			} else if ($text == "Нет") {
 				setAction ( $chat_id, "action_borrow" );

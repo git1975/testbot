@@ -34,21 +34,18 @@ class HandlerLend {
 		} else if ($text === 'Инфо') {
 			setAction ( $chat_id, "action_lend_info" );
 			
-			$content = getFileContent2("borrowers");
-			
 			//sendKeyboard ( $chat_id, "Вы инвестировали:1) 16.01.2015 - 10 000 руб. Из них выдано для:-)16.01.2015 | Смирнов А.В. (id 12345) | 500 руб. | Остат 389 руб. | Рейт. B | Став. 20% | Займ 100 000 руб.-)16.01.2015 | Иванов С.В. (id 23453) | 500 руб. | Остат 356 руб. | Рейт. C | Став. 30% | Займ 50 000 руб.-)17.01.2015 | Симонов М.К. (id 74473) | 500 руб. | Остат 389 руб. | Рейт. C | Став. 30% | Займ 30 000 руб", $keyboards->keyboardBack );
 			sendKeyboard ( $chat_id, $content, $keyboards->keyboardBack );
 			return;
 		} else if ($text === 'Выданные займы') {
 			setAction ( $chat_id, "action_lend_info" );
 						
-			//$borrowers = getFileContent2("borrowers");	
 			$s = "";
 			$file = fopen("borrowers.txt", "r");
 			while(!feof($file)){
 				$line = fgets($file);
 				$pieces = explode(";", $line);
-				if($pieces[1] !== ""){
+				if(strlen($pieces[1]) > 0){
 					$s = $s.$pieces[3]." на сумму ".$pieces[1]." руб. на срок ".$pieces[2]." мес.\r\n";
 				}
 			}
@@ -57,12 +54,21 @@ class HandlerLend {
 			$s = $s."...\r\n";
 			$s = $s."01.12.2015 на сумму 300 руб. на срок 3 мес.\r\n";
 			
-			//$pieces = explode(" ", $borrowers);
-			
 			sendKeyboard ( $chat_id, $s, $keyboards->keyboardBack );
 			return;
 		} else if ($text == 'График получения выплат') {
-			sendKeyboard ( $chat_id, $text, $keyboards->keyboardBack );
+			$file = fopen("borrowers.txt", "r");
+			$sum = 0;
+			while(!feof($file)){
+				$line = fgets($file);
+				$pieces = explode(";", $line);
+				if($pieces[1] !== ""){
+					$sum = $sum + intval($pieces[1]);
+				}
+			}
+			fclose($file);
+			
+			sendKeyboard ( $chat_id, "Всего Вам должны $sum руб.", $keyboards->keyboardBack );
 			return;
 		} else if ($text == 'Подать на взыскание') {
 			$file = fopen("borrowers.txt", "r");
