@@ -22,13 +22,11 @@ function processMessage($message) {
     if (isset($message['text'])) {
         // incoming text message
         $text = $message['text'];
-        //$text = strtolower($text);
-        error_log("---->>>>chat_id: $chat_id");
-        error_log("---->>>>MSG: $text");
-        
         $file = "action_$chat_id.txt";
         $action = file_get_contents($file);
         
+        error_log("---->>>>chat_id: $chat_id");
+        error_log("---->>>>MSG: $text");
         error_log("---->>>>action: $action");
         
         $end = true;
