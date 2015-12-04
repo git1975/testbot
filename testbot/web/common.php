@@ -172,10 +172,10 @@ function processMessage($message) {
         	} else {
         		setAction($chat_id, "action_card_commit");
         		apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => "Подтвердите секретный код 1234"));
-        		setFileContent($chat_id, "action_card_code", "1234");
+        		setFileContent($chat_id, "code", "1234");
         	}
         } else if($action == "action_card_commit"){
-        	$content = setFileContent($chat_id, "action_card_code");
+        	$content = setFileContent($chat_id, "code");
         	error_log("---->>>>action_card_code: $content");
         	if (strcasecmp($text, $content) === 0) {
         		setAction($chat_id, "start");
