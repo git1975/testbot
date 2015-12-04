@@ -175,7 +175,7 @@ function processMessage($message) {
         		apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => 'До свидания!'));
         		//++++++++==============
         } else {
-            sendMsg($chat_id, "Выберите действие");
+            sendStartScreen($chat_id, "Выберите действие");
         }
     }
 }
