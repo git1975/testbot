@@ -163,7 +163,7 @@ function sendStartScreen($chat_id, $content){
 	if(isCardLinked($chat_id)){
 		$keyboard = $keyboards->keyboardLendBorrow;
 	}
-	 apiRequestJson("sendMessage",
+	apiRequestJson("sendMessage",
                 [
                     'chat_id' => $chat_id,
                     'text' => $content,
@@ -173,6 +173,19 @@ function sendStartScreen($chat_id, $content){
                         'resize_keyboard' => true
                     ]
                 ]);
+}
+
+function sendKeyboard($chat_id, $content, $keyboard){
+	apiRequestJson("sendMessage",
+			[
+					'chat_id' => $chat_id,
+					'text' => $content,
+					'reply_markup' => [
+							'keyboard' => $keyboard,
+							'one_time_keyboard' => true,
+							'resize_keyboard' => true
+					]
+			]);
 }
 
 function processMessage($message) {
@@ -281,15 +294,18 @@ function processMessage($message) {
         		apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => 'До свидания!'));
         		//++++++++==============
         } else if ($text === 'Привязать карту') {        	
-        	$file = "action_$chat_id.txt";
-        	//$content = file_get_contents($file);
-        	file_put_contents($file, "action_card_link");
-        	apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => "Введите номер карты"));
+        	setAction($chat_id, "action_card_link");
+        	send($chat_id, "Введите номер карты");
         } else if ($text === 'Нет карты банка') {
         	
         } else if ($text === 'Инфо') {
-        	$content = f();
-        	apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => $content));
+        	send($chat_id, $text);
+        } else if ($text === 'Взять в долг') {
+        	setAction($chat_id, "action_card_link");        	
+        	$msg = new MessagesBorrow();
+        	send($chat_id, $msg->launchMsg[0]);
+        	send($chat_id, $msg->launchMsg[1]);
+        	sendKeyboard($chat_id, $msg->launchMsg[2], $keyboards->keyboardBorrow);
         } else {
             apiRequestWebhook("sendMessage",
                 [
