@@ -30,7 +30,7 @@ class MessagesBorrow {
 
     private function getPaymentSchedule($monthCount) {
         $paymentLogic = new PaymentLogic();
-        $resultArray = $paymentLogic->getPaymentSchedule($monthCount);
+        $resultArray[] = $paymentLogic->getPaymentSchedule($monthCount);
         error_log("RESULT ARRAY:");
         foreach($resultArray as $result) {
             error_log($result);
