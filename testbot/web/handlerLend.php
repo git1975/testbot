@@ -25,14 +25,14 @@ class HandlerLend {
 			}
 			return;
 		} else if ($text === 'Дать в долг') {
-			setAction ( $chat_id, "action_lend" );
+			setAction ( $chat_id, "action_lend_info" );
 			sendMsg($chat_id, $msgs->infoMsg[0]);
 			sendMsg($chat_id, $msgs->infoMsg[1]);
 			sendMsg($chat_id, $msgs->infoMsg[2]);
 			sendKeyboard ( $chat_id, "Выберите действие", $keyboards->keyboardLend );
 			return;
 		} else if ($text === 'Аналитика') {
-			setAction ( $chat_id, "action_lend" );
+			setAction ( $chat_id, "action_lend_info" );
 			//addFileContent("borrowers", "qqqqq");
 			sendKeyboard ( $chat_id, $text, $keyboards->keyboardBack );
 			return;
