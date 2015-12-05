@@ -28,6 +28,7 @@ class PaymentLogic {
 
     private function getNextPaymentDate($referenceDate){
         // referenceDate - стартовая дата. Текущая, либо каждая следующая на каждом шаге итерации
+        $tomorrow = date('y:m:d', time() + 86400);
 
         $newDate = $referenceDate->modify("+1 month");
         error_log("Date in a month: " + $newDate->format("Y-m-d"));
@@ -37,7 +38,9 @@ class PaymentLogic {
     public function getPaymentSchedule($period) {
         /* получает на вход кол-во месяцев, на выходе - массив дат с шагом в месяц */
         $datesArray = [];
-        $referenceDate = new DateTime(); //текущая дата
+        //$referenceDate = new DateTime(); //текущая дата
+        $referenceDate = date('Y-m-d');
+        error_log("REFERENCE DATE: $referenceDate");
         for ($i = 0; $i < $period; $i++ ) {
             $datesArray[i] = $this->getNextPaymentDate($referenceDate);
             $referenceDate = $this->getNextPaymentDate($referenceDate);
