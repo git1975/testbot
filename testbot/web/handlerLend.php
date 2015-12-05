@@ -16,11 +16,12 @@ class HandlerLend {
 			sendMsg ( $chat_id, "Напиши сумму инвестиций. Например, 5000" );
 			return;
 		} else if ($text === 'Назад') {
-			if($action == "action_lend"){
+			//if($action == "action_lend"){
+			if($action == "action_lend" || $action == "action_lend_sum"){
 				setAction ( $chat_id, "-" );
 				sendStartScreen($chat_id, "Выберите действие");
 			} else {
-				setAction ( $chat_id, "action_lend" );
+				setAction ( $chat_id, "action_lend" ); //вот поэтому приходится дважды жать назад
 				sendKeyboard ( $chat_id, "Выберите действие", $keyboards->keyboardLend );
 			}
 			return;
