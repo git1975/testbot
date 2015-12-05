@@ -17,6 +17,7 @@ class HandlerLend {
 			return;
 		} else if ($text === 'Назад') {
 			//if($action == "action_lend"){
+            error_log("CURRENT ACTION: $action");
 			if($action == "action_lend" || $action == "action_lend_sum"){
 				setAction ( $chat_id, "-" );
 				sendStartScreen($chat_id, "Выберите действие");
