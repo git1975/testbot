@@ -130,7 +130,10 @@ class MessagesBorrow {
     ];
 
     public function getSumAndScheduleMessage($sum, $monthCount){
-        $datesArray = $this->getPaymentSchedule($monthCount);
+        //$datesArray = $this->getPaymentSchedule($monthCount);
+        $paymentLogic = new PaymentLogic();
+        $datesArray = $paymentLogic->getPaymentSchedule($monthCount);
+        $monthlyPayment = $paymentLogic->getPaymentMonthlyInq($sum,$monthCount,$this->getPercent());
         $resultArray = [];
         /*$resultMsg = "Ты запросил $sum руб. на $monthCount мес. Твой график платежей будет следующим:
 
@@ -142,24 +145,20 @@ class MessagesBorrow {
         ";
         */
 
-        $msgCommon = "Ты запросил $sum руб. на $monthCount мес. Твой график платежей будет следующим:
-        ";
+        $msgCommon = "Ты запросил $sum руб. на $monthCount мес. Твой график платежей будет следующим:";
         $msgAdditional="";
 
-        $i=0;
-        $percent = $this->getPercent();
-        foreach ($datesArray as $date) {
-            //error_log("DATE: $date");
 
-            $resultArray[$i] = $date."   ".$this->calcMonthlyPayment($sum,$monthCount,$percent); //тут все ок
-            $msgAdditional = "\n $msgAdditional : $this->calcMonthlyPayment($sum,$monthCount,$percent) руб.";
-            //error_log("RESULTARRAY $i : $resultArray[$i]");
-            $i++;
+        $percent = $this->getPercent();
+        error_log("PERCENTAGE: $percent");
+
+
+        foreach ($datesArray as $date) {
+
+            $msgAdditional = $msgAdditional."$date  : $monthlyPayment руб. \n";
+
         }
 
-        /*foreach ($resultArray as $line) {
-            $resultMsg.$line."\n";
-        }*/
 
         return $msgCommon.$msgAdditional;
 
