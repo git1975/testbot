@@ -108,7 +108,7 @@ class HandlerLend {
 				sendKeyboard($chat_id, "Вы инвестировали $sum руб. Следите за аналитикой", $keyboards->keyboardLend);
 			} else if($text == "Нет"){
 				setAction($chat_id, "action_lend_sum");
-				sendKeyboard ( $chat_id, "Напиши сумму инвестиций. Например, 5000" );
+				sendMsg ( $chat_id, "Напиши сумму инвестиций. Например, 5000" );
 			} else {
 				sendKeyboard($chat_id, "Ответьте Да или Нет",
 						$keyboards->keyboardYesNo);
