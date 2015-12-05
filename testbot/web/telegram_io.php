@@ -212,6 +212,19 @@ function sendKeyboard($chat_id, $content, $keyboard){
 			]);
 }
 
+function sendKeyboardNumeric($chat_id, $content, $keyboard){
+    apiRequestJson("sendMessage",
+        [
+            'chat_id' => $chat_id,
+            'text' => $content,
+            'reply_markup' => [
+                'keyboard' => $keyboard,
+                'one_time_keyboard' => false,
+                'resize_keyboard' => true
+            ]
+        ]);
+}
+
 
 
 

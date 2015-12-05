@@ -84,6 +84,7 @@ function processMessage($message) {
         if ($text === 'Привязать карту') {        	
         	setAction($chat_id, "action_card_link");
         	sendMsg($chat_id, $msgStart->linkCardMsg['enterCardNumberMsg']);
+            //sendKeyboardNumeric($chat_id, $msgStart->linkCardMsg['enterCardNumberMsg'], $keyboards->keyboardNumeric);
         } else if ($text === 'Нет карты банка') {
         	
         } else if ($text === 'Инфо') {
