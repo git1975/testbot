@@ -81,7 +81,7 @@ function processMessage($message) {
         	$files = array();
         	foreach (glob("*_card.txt") as $file) {
         		$files[] = $file;
-        		foreach ($files[] as $f) {
+        		foreach ($files as $f) {
         			file_put_contents($f, "");
         		}        		
         	}
