@@ -65,15 +65,16 @@ class HandlerBorrow {
 				$riskGroup = $riskLogic->getUserGroupRisk();
 				$loanPercent = $riskLogic->getLoanPercent($riskGroup);
 				$msgRisk = "Твой кредитный рейтинг $riskGroup, процентная ставка $loanPercent% годовых";
-				/*if ($riskGroup == 'A') {
-					$result = 'Твой рейтинг A. Ставка по кредиту ';
+				$msgsBorrow = new MessagesBorrow();
+				if ($riskGroup == 'A') {
+					$msgRisk = $msgRisk.$msgsBorrow->ratingMsg['A'];
 				} else if ($riskGroup == 'B') {
-					$result = ;
+					$msgRisk = $msgRisk.$msgsBorrow->ratingMsg['B'];
 				} else if ($riskGroup == 'C') {
-					$result = ;
+					$msgRisk = $msgRisk.$msgsBorrow->ratingMsg['C'];
 				} else if ($riskGroup == 'D') {
-					$result = ;
-				} */
+					$msgRisk = $msgRisk.$msgsBorrow->ratingMsg['D'];
+				}
 
 				sendKeyboard ( $chat_id, $msgRisk, $keyboards->keyboardBorrow );
             } else if ($text == "График платежей") {
