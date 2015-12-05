@@ -10,9 +10,6 @@ include_once 'RiskLogic.php';
  */
 class MessagesBorrow {
 
-
-
-
     private function getRiskGroup() {
         $riskLogic = new RiskLogic();
         return $riskLogic->getUserGroupRisk(); //Не забыть поправить на вызов с userId для реального сервиса
