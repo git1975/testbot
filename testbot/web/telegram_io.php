@@ -180,7 +180,7 @@ function sendMsg($chat_id, $content){
 
 function sendStartScreen($chat_id, $content){
 	if($content == ""){
-		$content = 'Привет! Я Альфа-Бот :) Давай познакомимся - и я расскажу тебе об интересных новых возможностях, которые ты можешь для себя открыть!';
+		$content = 'Выберите действие';
 	}
 	$keyboards = new Keyboards;
 	$keyboard = $keyboards->keyboardStart;
