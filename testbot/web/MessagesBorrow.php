@@ -142,8 +142,26 @@ class MessagesBorrow {
         $percent = $this->getPercent();
         error_log("PERCENTAGE: $percent");
 
+        //массив для преобразования названий месяцев на русский
+        $trans = [
+            "January" => "Январь",
+            "February" => "Февраль",
+            "March" => "Март",
+            "April" => "Апрель",
+            "May" => "Апрель",
+            "June" => "Апрель",
+            "July" => "Апрель",
+            "August" => "Апрель",
+            "September" => "Апрель",
+            "October" => "Апрель",
+            "November" => "Апрель",
+            "December" => "Апрель"
+        ];
 
         foreach ($datesArray as $date) {
+            $dateFormatted = DateTime::format("j F Y");
+            //$dateFormattedRus = strtr( $english_month, $trans);
+            error_log("DATE FORMATTED: $dateFormatted");
             $msgAdditional = $msgAdditional."$date  : ".round($monthlyPayment)." руб. \n";
         }
 
