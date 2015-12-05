@@ -12,7 +12,6 @@ require_once 'logic.php';
  * Time: 20:23
  */
 class HandlerBorrow {
-    //TODO до кнопок да и нет должно выводиться сообщение с графиком платежей
 
     function sendAllMessages($chat_id, $msgArray) {
         foreach ($msgArray as $message) {
@@ -76,7 +75,7 @@ class HandlerBorrow {
 			} else {
 				setAction ( $chat_id, "action_borrow_per" );
 				setFileContent ( $chat_id, "borrowsum", $text );
-				sendMsg ( $chat_id, $msgs->loanInqMsg[3] );
+				sendMsg ( $chat_id, $msgs->loanInqMsg[3] ); //теперь напиши срок
 			}
 
         } else if ($action == "action_borrow_per") {
@@ -87,9 +86,9 @@ class HandlerBorrow {
 				setFileContent ( $chat_id, "borrowper", $text );
 				$sum = getFileContent ( $chat_id, "borrowsum" );
 
-				//sendMsg ( $chat_id, "Ты запросил $sum руб на $text мес." );
+
                 sendMsg($chat_id,$msgs->getSumAndScheduleMessage($sum, $text));
-                //sendMsg($chat_id,$msgs->loanInqMsg[4]);
+
 				sendKeyboard ( $chat_id, "Согласен?", $keyboards->keyboardYesNo );
 			}
 
@@ -116,17 +115,6 @@ class HandlerBorrow {
 			} else {
 				sendKeyboard ( $chat_id, "Ответьте Да или Нет", $keyboards->keyboardYesNo );
 			}
-        } else if ($action == "action_borrow_payment_schedule") {
-            //TODO тут вроде нет никаких действий
-
-        } else if ($action == "action_borrow_loan_data") {
-            //TODO тут вроде нет никаких действий
-
-        } else if ($action == "action_borrow_debt_remaining") {
-            //TODO тут вроде нет никаких действий
-
-        } else if ($action == "action_borrow_ask_rating") {
-            //TODO тут вроде нет никаких действий
         }
 	}
 }

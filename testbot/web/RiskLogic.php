@@ -22,9 +22,9 @@ class RiskLogic {
         } else if ($riskGroup === "B") {
             return 20;
         } else if ($riskGroup === "C") {
-            return 40;
+            return 30;
         } else {
-            return 60;
+            return 40;
         }
     }
 
