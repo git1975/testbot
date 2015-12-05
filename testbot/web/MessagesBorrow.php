@@ -130,20 +130,10 @@ class MessagesBorrow {
     ];
 
     public function getSumAndScheduleMessage($sum, $monthCount){
-        //$datesArray = $this->getPaymentSchedule($monthCount);
+
         $paymentLogic = new PaymentLogic();
         $datesArray = $paymentLogic->getPaymentSchedule($monthCount);
         $monthlyPayment = $paymentLogic->getPaymentMonthlyInq($sum,$monthCount,$this->getPercent());
-        $resultArray = [];
-        /*$resultMsg = "Ты запросил $sum руб. на $monthCount мес. Твой график платежей будет следующим:
-
-5 января 2016 – 1600 руб.
-
-5 февраля 2016 – 1600 руб.
-
-5 марта 2016 – 1600 руб.
-        ";
-        */
 
         $msgCommon = "Ты запросил $sum руб. на $monthCount мес. Твой график платежей будет следующим:";
         $msgAdditional="";
@@ -155,7 +145,7 @@ class MessagesBorrow {
 
         foreach ($datesArray as $date) {
 
-            $msgAdditional = $msgAdditional."$date  : $monthlyPayment руб. \n";
+            $msgAdditional = $msgAdditional."$date  : round($monthlyPayment) руб. \n";
 
         }
 
