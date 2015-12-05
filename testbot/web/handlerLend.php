@@ -72,7 +72,9 @@ class HandlerLend {
 				$pieces = explode(";", $line);
 				if($pieces[1] !== ""){
 					//$sum = $sum + intval($pieces[1]);
-					$sum = $sum + 66;
+					if(strlen($pieces[1]) > 0){
+						$sum = $sum + 66;
+					}
 				}
 			}
 			fclose($file);
