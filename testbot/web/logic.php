@@ -115,7 +115,6 @@ function processMessage($message) {
             sendMsg($chat_id, $msg->launchMsg[0]);
         	sendMsg($chat_id, $msg->launchMsg[1]);
         	sendMsg($chat_id, $msg->launchMsg[2]);
-            sendMsg($chat_id, $msg->launchMsg[3]);
 
         	sendKeyboard($chat_id, $msgRisk, $keyboards->keyboardBorrow);
         } else if ($text === 'Дать в долг') {

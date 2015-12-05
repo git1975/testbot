@@ -105,7 +105,7 @@ class HandlerBorrow {
 
                 sendMsg($chat_id,$msgs->getSumAndScheduleMessage($sum, $text));
 
-				sendKeyboard ( $chat_id, "Согласен?", $keyboards->keyboardYesNo );
+				sendKeyboard ( $chat_id, "Оформить кредит на таких условиях?", $keyboards->keyboardYesNo );
 			}
 
         } else if ($action == "action_borrow_yesno") {

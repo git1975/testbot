@@ -20,29 +20,11 @@ class MessagesBorrow {
         return $riskLogic->getLoanPercent($riskLogic->getUserGroupRisk()); //Не забыть поправить на вызов с userId для реального сервиса
     }
 
-    private function calcMonthlyPayment($loanSum, $period, $percent) {
-        $paymentLogic = new PaymentLogic();
-        return $paymentLogic->getPaymentMonthlyInq($loanSum, $period, $percent);
-    }
-
-    private function getPaymentSchedule($monthCount) {
-        $paymentLogic = new PaymentLogic();
-        $resultArray[] = $paymentLogic->getPaymentSchedule($monthCount);
-        error_log("RESULT ARRAY:"); //TODO - тут пусто!
-        error_log($paymentLogic->getPaymentSchedule($monthCount));
-        foreach($resultArray as $result) {
-            error_log($result);
-        }
-        return $paymentLogic->getPaymentSchedule($monthCount); //это массив
-
-    }
-
-
 
 
     /* При переходе на экран заемщика */
     public $launchMsg = [
-        'Здесь вы можете запросить деньги в долг.',
+        'Здесь ты можешь запросить деньги в долг.',
 
         'После получения займа я рассчитаю твой график платежей. Каждый месяц в назначенный день сумма платежа будет списываться с твоей карты.',
 
@@ -53,7 +35,7 @@ class MessagesBorrow {
     public $infoMsg = [
         'Прежде чем занимать деньги узнайте свои рейтинг и ставку, а так же возможности их изменения.',
 
-        'Если вы уже занимали деньги с моей помощью, то вы можете посмотреть график платежей.Кроме того, я буду оповещать вас о приближении очередного платежа.',
+        'Если ты уже занимал деньги с моей помощью, то можешь посмотреть график платежей. Кроме того, я буду оповещать о приближении очередного платежа.',
     ];
 
     /* Узнать свой рейтинг и ставку */
@@ -142,33 +124,12 @@ class MessagesBorrow {
         $percent = $this->getPercent();
         error_log("PERCENTAGE: $percent");
 
-        //массив для преобразования названий месяцев на русский
-        $trans = [
-            "January" => "Январь",
-            "February" => "Февраль",
-            "March" => "Март",
-            "April" => "Апрель",
-            "May" => "Апрель",
-            "June" => "Апрель",
-            "July" => "Апрель",
-            "August" => "Апрель",
-            "September" => "Апрель",
-            "October" => "Апрель",
-            "November" => "Апрель",
-            "December" => "Апрель"
-        ];
-
         foreach ($datesArray as $date) {
-            //$dateFormatted = DateTime::format("j F Y");
-            //$dateFormattedRus = strtr( $english_month, $trans);
-            //error_log("DATE FORMATTED: $dateFormatted");
             $msgAdditional = $msgAdditional."$date  : ".round($monthlyPayment)." руб. \n";
         }
-
 
         return $msgCommon.$msgAdditional;
 
     }
-
 
 }
