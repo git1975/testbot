@@ -64,7 +64,7 @@ class HandlerBorrow {
 				$riskLogic = new RiskLogic();
 				$riskGroup = $riskLogic->getUserGroupRisk();
 				$loanPercent = $riskLogic->getLoanPercent($riskGroup);
-				$msgRisk = "Твой кредитный рейтинг $riskGroup, процентная ставка $loanPercent% годовых";
+				$msgRisk = "Твой кредитный рейтинг $riskGroup, процентная ставка $loanPercent% годовых.";
 				$msgsBorrow = new MessagesBorrow();
 				if ($riskGroup == 'A') {
 					$msgRisk = $msgRisk.$msgsBorrow->ratingMsg['A'];
