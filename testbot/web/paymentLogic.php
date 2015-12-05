@@ -44,6 +44,7 @@ class PaymentLogic {
 
             $datesArray[$i] = $this->getNextPaymentDate($referenceDate);
             $referenceDate = $this->getNextPaymentDate($referenceDate);
+            error_log("I=$i     datesArray=$datesArray[i]");
             error_log("REFERENCE DATE: $referenceDate"); //текущая дата
         }
         return $datesArray;
