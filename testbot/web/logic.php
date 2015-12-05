@@ -77,6 +77,19 @@ function processMessage($message) {
         	return;
         }
         
+        if ($text === 'reset') {
+        	$files = array();
+        	foreach (glob("*_card.txt") as $file) {
+        		$files[] = $file;
+        		foreach ($files[] as $f) {
+        			file_put_contents($f, "");
+        		}        		
+        	}
+        	setAction($chat_id, "");
+        	sendStartScreen($chat_id, "Выберите действие");
+        	return;
+        }
+        
         if ($text === 'Назад' || $text === 'start') {
         	setAction($chat_id, "");
         	sendStartScreen($chat_id, "Выберите действие");
