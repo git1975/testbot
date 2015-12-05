@@ -28,18 +28,18 @@ class PaymentLogic {
 
     private function getNextPaymentDate($referenceDate){
         // referenceDate - стартовая дата. Текущая, либо каждая следующая на каждом шаге итерации
-        //$tomorrow = date('y:m:d', time() + 86400);
-        //strtotime($referenceDate)
+
         $time = strtotime($referenceDate);
         $newDate = date("Y-m-d", strtotime("+1 month", $time));
 
         error_log("TIME: $time");
         error_log("NEWDATE: $newDate");
-        //$newDate = $referenceDate->modify("+1 month");
-        error_log("Date in a month: " + $newDate->format("Y-m-d"));
 
 
-        return $newDate->format("Y-m-d");
+
+
+        //return $newDate->format("Y-m-d");
+        return $newDate;
     }
 
     public function getPaymentSchedule($period) {
