@@ -4,6 +4,7 @@ require_once 'Keyboards.php';
 require_once 'telegram_io.php';
 require_once 'actionBorrowYesno.php';
 require_once 'logic.php';
+require_once 'RiskLogic.php';
 
 /**
  * Created by PhpStorm.
@@ -12,7 +13,6 @@ require_once 'logic.php';
  * Time: 20:23
  */
 class HandlerBorrow {
-    //TODO до кнопок да и нет должно выводиться сообщение с графиком платежей
 
     function sendAllMessages($chat_id, $msgArray) {
         foreach ($msgArray as $message) {
@@ -39,7 +39,7 @@ class HandlerBorrow {
 		} else if ($text === 'Назад') {
 			if($action == "action_borrow"){
 				setAction ( $chat_id, "-" );
-				sendStartScreen($chat_id, "Start Screen");
+				sendStartScreen($chat_id, "Назад");
 			} else {
 				setAction ( $chat_id, "action_borrow" );
 				sendKeyboard ( $chat_id, "Выберите действие", $keyboards->keyboardLend );
@@ -61,7 +61,22 @@ class HandlerBorrow {
 			} else if ($text == "Данные по займам") {
                 sendKeyboard ( $chat_id, $msgs->takenLoansMsg, $keyboards->keyboardBorrow );
             } else if ($text == "Узнать ставку") {
-                sendKeyboard ( $chat_id, $msgs->ratingMsg[0], $keyboards->keyboardBorrow );
+				$riskLogic = new RiskLogic();
+				$riskGroup = $riskLogic->getUserGroupRisk();
+				$loanPercent = $riskLogic->getLoanPercent($riskGroup);
+				$msgRisk = "Твой кредитный рейтинг $riskGroup, процентная ставка $loanPercent% годовых.";
+				$msgsBorrow = new MessagesBorrow();
+				if ($riskGroup == 'A') {
+					$msgRisk = $msgRisk.$msgsBorrow->ratingMsg['A'];
+				} else if ($riskGroup == 'B') {
+					$msgRisk = $msgRisk.$msgsBorrow->ratingMsg['B'];
+				} else if ($riskGroup == 'C') {
+					$msgRisk = $msgRisk.$msgsBorrow->ratingMsg['C'];
+				} else if ($riskGroup == 'D') {
+					$msgRisk = $msgRisk.$msgsBorrow->ratingMsg['D'];
+				}
+
+				sendKeyboard ( $chat_id, $msgRisk, $keyboards->keyboardBorrow );
             } else if ($text == "График платежей") {
                 sendKeyboard ( $chat_id, $msgs->payScheduleMsg, $keyboards->keyboardBorrow );
             } else if ($text == "Остаток долга") {
@@ -76,7 +91,7 @@ class HandlerBorrow {
 			} else {
 				setAction ( $chat_id, "action_borrow_per" );
 				setFileContent ( $chat_id, "borrowsum", $text );
-				sendMsg ( $chat_id, $msgs->loanInqMsg[3] );
+				sendMsg ( $chat_id, $msgs->loanInqMsg[3] ); //теперь напиши срок
 			}
 
         } else if ($action == "action_borrow_per") {
@@ -87,9 +102,9 @@ class HandlerBorrow {
 				setFileContent ( $chat_id, "borrowper", $text );
 				$sum = getFileContent ( $chat_id, "borrowsum" );
 
-				sendMsg ( $chat_id, "Ты запросил $sum руб на $text мес." );
+
                 sendMsg($chat_id,$msgs->getSumAndScheduleMessage($sum, $text));
-                sendMsg($chat_id,$msgs->loanInqMsg[4]);
+
 				sendKeyboard ( $chat_id, "Согласен?", $keyboards->keyboardYesNo );
 			}
 
@@ -116,17 +131,6 @@ class HandlerBorrow {
 			} else {
 				sendKeyboard ( $chat_id, "Ответьте Да или Нет", $keyboards->keyboardYesNo );
 			}
-        } else if ($action == "action_borrow_payment_schedule") {
-            //TODO тут вроде нет никаких действий
-
-        } else if ($action == "action_borrow_loan_data") {
-            //TODO тут вроде нет никаких действий
-
-        } else if ($action == "action_borrow_debt_remaining") {
-            //TODO тут вроде нет никаких действий
-
-        } else if ($action == "action_borrow_ask_rating") {
-            //TODO тут вроде нет никаких действий
         }
 	}
 }

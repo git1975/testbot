@@ -11,6 +11,7 @@ require_once 'telegram_io.php';
 require_once 'actionBorrowYesno.php';
 require_once 'handlerLend.php';
 require_once 'handlerBorrow.php';
+require_once 'RiskLogic.php';
 
 class Logic {
 function processMessage($message) {
@@ -90,15 +91,24 @@ function processMessage($message) {
         } else if ($text === 'Инфо') {
         	sendMsg($chat_id, $text);
         } else if ($text === 'Взять в долг') {
-        	setAction($chat_id, "action_borrow");
+        	$riskLogic = new RiskLogic();
+            setAction($chat_id, "action_borrow");
         	$msg = new MessagesBorrow();
-        	sendMsg($chat_id, $msg->launchMsg[0]);
+            $riskGroup = $riskLogic->getUserGroupRisk();
+            $percent = $riskLogic->getLoanPercent($riskGroup);
+            $msgRisk = "Твой кредитный рейтинг $riskGroup, процентная ставка $percent% годовых";
+
+            sendMsg($chat_id, $msg->launchMsg[0]);
         	sendMsg($chat_id, $msg->launchMsg[1]);
-        	sendKeyboard($chat_id, $msg->launchMsg[2], $keyboards->keyboardBorrow);
+        	sendMsg($chat_id, $msg->launchMsg[2]);
+
+        	sendKeyboard($chat_id, $msgRisk, $keyboards->keyboardBorrow);
         } else if ($text === 'Дать в долг') {
         	setAction ( $chat_id, "action_lend" );
         	$msg = new MessagesLend ();
-        	sendKeyboard ( $chat_id, $msg->launchMsg [0], $keyboards->keyboardLend );        	
+        	sendMsg($chat_id, $msg->launchMsg [0]);
+            sendMsg($chat_id, $msg->launchMsg [1]);
+            sendKeyboard ( $chat_id, $msg->launchMsg [2], $keyboards->keyboardLend );
         } else if (strcasecmp($text, "start") === 0 || strcasecmp($action, "start") === 0) {
         	sendStartScreen($chat_id, "");
         } else if (strcasecmp($text, "lend") === 0) {

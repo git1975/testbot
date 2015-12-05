@@ -16,7 +16,8 @@ class HandlerLend {
 			sendMsg ( $chat_id, "Напиши сумму инвестиций. Например, 5000" );
 			return;
 		} else if ($text === 'Назад') {
-			if($action == "action_lend"){
+			//if($action == "action_lend"){
+			if($action == "action_lend" || $action == "action_lend_sumyesno"){ //чтобы после размещения суммы назад переходили по одному нажатию
 				setAction ( $chat_id, "-" );
 				sendStartScreen($chat_id, "Выберите действие");
 			} else {

@@ -180,7 +180,7 @@ function sendMsg($chat_id, $content){
 
 function sendStartScreen($chat_id, $content){
 	if($content == ""){
-		$content = 'Start screen';
+		$content = 'Выберите действие';
 	}
 	$keyboards = new Keyboards;
 	$keyboard = $keyboards->keyboardStart;
