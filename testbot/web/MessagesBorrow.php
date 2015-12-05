@@ -145,7 +145,7 @@ class MessagesBorrow {
             //$resultArray[$i] = $date."   ".$this->calcMonthlyPayment($sum,$monthCount,$percent);
             $resultArray[$i] = $date;
             error_log("RESULTARRAY $i : $resultArray[$i]");
-            $i+=1;
+            $i++;
         }
 
         foreach ($resultArray as $line) {
