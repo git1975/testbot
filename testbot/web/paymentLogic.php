@@ -38,6 +38,7 @@ class PaymentLogic {
         //$newDate = $referenceDate->modify("+1 month");
         error_log("Date in a month: " + $newDate->format("Y-m-d"));
 
+
         return $newDate->format("Y-m-d");
     }
 
