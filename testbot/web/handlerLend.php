@@ -1,6 +1,7 @@
 <?php
 require_once 'Keyboards.php';
 require_once 'telegram_io.php';
+require_once 'MessagesLend.php';
 
 class HandlerLend {
 	function handle($message) {
@@ -8,7 +9,8 @@ class HandlerLend {
 		$text = $message ['text'];
 		$keyboards = new Keyboards ();
 		$action = getAction($chat_id);
-		
+		$msgs = new MessagesLend();
+
 		if ($text === 'Разместить сумму') {
 			setAction ( $chat_id, "action_lend_sum" );
 			sendMsg ( $chat_id, "Напиши сумму инвестиций. Например, 5000" );
@@ -24,18 +26,22 @@ class HandlerLend {
 			return;
 		} else if ($text === 'Дать в долг') {
 			setAction ( $chat_id, "action_lend" );
+			sendMsg("$chat_id", $msgs->infoMsg[0]);
+			sendMsg("$chat_id", $msgs->infoMsg[1]);
+			sendMsg("$chat_id", $msgs->infoMsg[2]);
 			sendKeyboard ( $chat_id, "Выберите действие", $keyboards->keyboardLend );
 			return;
 		} else if ($text === 'Аналитика') {
 			setAction ( $chat_id, "action_lend" );
 			//addFileContent("borrowers", "qqqqq");
-			sendKeyboard ( $chat_id, $content, $keyboards->keyboardBack );
+			sendKeyboard ( $chat_id, $text, $keyboards->keyboardBack );
 			return;
 		} else if ($text === 'Инфо') {
 			setAction ( $chat_id, "action_lend_info" );
-			
-			//sendKeyboard ( $chat_id, "Вы инвестировали:1) 16.01.2015 - 10 000 руб. Из них выдано для:-)16.01.2015 | Смирнов А.В. (id 12345) | 500 руб. | Остат 389 руб. | Рейт. B | Став. 20% | Займ 100 000 руб.-)16.01.2015 | Иванов С.В. (id 23453) | 500 руб. | Остат 356 руб. | Рейт. C | Став. 30% | Займ 50 000 руб.-)17.01.2015 | Симонов М.К. (id 74473) | 500 руб. | Остат 389 руб. | Рейт. C | Став. 30% | Займ 30 000 руб", $keyboards->keyboardBack );
-			sendKeyboard ( $chat_id, $content, $keyboards->keyboardBack );
+
+			sendMsg("$chat_id", $msgs->infoMsg[0]);
+			sendMsg("$chat_id", $msgs->infoMsg[1]);
+			sendKeyboard ( $chat_id, $msgs->infoMsg[2], $keyboards->keyboardBack );
 			return;
 		} else if ($text === 'Выданные займы') {
 			setAction ( $chat_id, "action_lend_info" );
