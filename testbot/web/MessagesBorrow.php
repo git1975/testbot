@@ -144,9 +144,7 @@ class MessagesBorrow {
 
 
         foreach ($datesArray as $date) {
-
-            $msgAdditional = $msgAdditional."$date  : round($monthlyPayment) руб. \n";
-
+            $msgAdditional = $msgAdditional."$date  : ".round($monthlyPayment)." руб. \n";
         }
 
 
