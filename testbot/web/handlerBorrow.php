@@ -99,7 +99,7 @@ class HandlerBorrow {
 				sendMsg ( $chat_id, "Неверный формат процентов" );
 			} else {
 				setAction ( $chat_id, "action_borrow_yesno" );
-				setFileContent ( $chat_id, "borrowper", $text );
+				setFileContent ( $chat_id, "borrowper", $text ); //TODO не опечатка ли?
 				$sum = getFileContent ( $chat_id, "borrowsum" );
 
 
