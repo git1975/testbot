@@ -17,12 +17,11 @@ class HandlerLend {
 			return;
 		} else if ($text === 'Назад') {
 			//if($action == "action_lend"){
-            error_log("CURRENT ACTION: $action");
-			if($action == "action_lend" || $action == "action_lend_sum"){
+			if($action == "action_lend" || $action == "action_lend_sumyesno"){ //чтобы после размещения суммы назад переходили по одному нажатию
 				setAction ( $chat_id, "-" );
 				sendStartScreen($chat_id, "Выберите действие");
 			} else {
-				setAction ( $chat_id, "action_lend" ); //вот поэтому приходится дважды жать назад
+				setAction ( $chat_id, "action_lend" );
 				sendKeyboard ( $chat_id, "Выберите действие", $keyboards->keyboardLend );
 			}
 			return;
