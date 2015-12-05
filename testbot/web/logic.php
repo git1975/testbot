@@ -44,12 +44,12 @@ function processMessage($message) {
         		setFileContent($chat_id, "card_pre", $text);
                 //send($chat_id, "Подтвердите секретный код ".$randomCode);
                 sendMsg($chat_id, $msgStart->linkCardMsg['smsSentMsg']);
-                //sendMsg($chat_id, $randomCode);
+                sendMsg($chat_id, $randomCode);
         	}
         } else if($action == "action_card_commit"){
         	$content = getFileContent($chat_id, "code");
-        	//if (strcasecmp($text, $content) === 0) {
-        	if(is_numeric($text) && strlen($text) === 4){
+        	if (strcasecmp($text, $content) === 0) {
+        	//if(is_numeric($text) && strlen($text) === 4){
         		setAction($chat_id, "start");
          		$content = getFileContent($chat_id, "card_pre");
        			setFileContent($chat_id, "card", $content);
