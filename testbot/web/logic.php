@@ -79,7 +79,7 @@ function processMessage($message) {
         
         if ($text === 'reset') {
         	$files = array();
-        	foreach (glob("*_card.txt") as $file) {
+        	foreach (glob("*.txt") as $file) {
         		$files[] = $file;
         		foreach ($files as $f) {
         			file_put_contents($f, "");
