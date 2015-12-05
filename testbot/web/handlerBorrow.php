@@ -4,6 +4,7 @@ require_once 'Keyboards.php';
 require_once 'telegram_io.php';
 require_once 'actionBorrowYesno.php';
 require_once 'logic.php';
+require_once 'RiskLogic.php';
 
 /**
  * Created by PhpStorm.
@@ -60,7 +61,21 @@ class HandlerBorrow {
 			} else if ($text == "Данные по займам") {
                 sendKeyboard ( $chat_id, $msgs->takenLoansMsg, $keyboards->keyboardBorrow );
             } else if ($text == "Узнать ставку") {
-                sendKeyboard ( $chat_id, $msgs->ratingMsg[0], $keyboards->keyboardBorrow );
+				$riskLogic = new RiskLogic();
+				$riskGroup = $riskLogic->getUserGroupRisk();
+				$loanPercent = $riskLogic->getLoanPercent($riskGroup);
+				$msgRisk = "Твой кредитный рейтинг $riskGroup, процентная ставка $loanPercent% годовых";
+				/*if ($riskGroup == 'A') {
+					$result = 'Твой рейтинг A. Ставка по кредиту ';
+				} else if ($riskGroup == 'B') {
+					$result = ;
+				} else if ($riskGroup == 'C') {
+					$result = ;
+				} else if ($riskGroup == 'D') {
+					$result = ;
+				} */
+
+				sendKeyboard ( $chat_id, $msgRisk, $keyboards->keyboardBorrow );
             } else if ($text == "График платежей") {
                 sendKeyboard ( $chat_id, $msgs->payScheduleMsg, $keyboards->keyboardBorrow );
             } else if ($text == "Остаток долга") {
