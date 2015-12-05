@@ -26,9 +26,9 @@ class HandlerLend {
 			return;
 		} else if ($text === 'Дать в долг') {
 			setAction ( $chat_id, "action_lend" );
-			sendMsg("$chat_id", $msgs->infoMsg[0]);
-			sendMsg("$chat_id", $msgs->infoMsg[1]);
-			sendMsg("$chat_id", $msgs->infoMsg[2]);
+			sendMsg($chat_id, $msgs->infoMsg[0]);
+			sendMsg($chat_id, $msgs->infoMsg[1]);
+			sendMsg($chat_id, $msgs->infoMsg[2]);
 			sendKeyboard ( $chat_id, "Выберите действие", $keyboards->keyboardLend );
 			return;
 		} else if ($text === 'Аналитика') {
@@ -39,8 +39,8 @@ class HandlerLend {
 		} else if ($text === 'Инфо') {
 			setAction ( $chat_id, "action_lend_info" );
 
-			sendMsg("$chat_id", $msgs->infoMsg[0]);
-			sendMsg("$chat_id", $msgs->infoMsg[1]);
+			sendMsg($chat_id, $msgs->infoMsg[0]);
+			sendMsg($chat_id, $msgs->infoMsg[1]);
 			sendKeyboard ( $chat_id, $msgs->infoMsg[2], $keyboards->keyboardBack );
 			return;
 		} else if ($text === 'Выданные займы') {
