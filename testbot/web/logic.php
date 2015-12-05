@@ -27,7 +27,7 @@ function processMessage($message) {
         $text = $message['text'];
         $action = getAction($chat_id);
         
-        error_log("---->>>>chat_id: $chat_id");
+        error_log("---->>>>>chat_id: $chat_id");
         error_log("---->>>>MSG: $text");
         error_log("---->>>>action: $action");
         
