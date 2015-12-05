@@ -10,9 +10,6 @@ include_once 'RiskLogic.php';
  */
 class MessagesBorrow {
 
-
-
-
     private function getRiskGroup() {
         $riskLogic = new RiskLogic();
         return $riskLogic->getUserGroupRisk(); //Не забыть поправить на вызов с userId для реального сервиса
@@ -30,7 +27,14 @@ class MessagesBorrow {
 
     private function getPaymentSchedule($monthCount) {
         $paymentLogic = new PaymentLogic();
+        $resultArray[] = $paymentLogic->getPaymentSchedule($monthCount);
+        error_log("RESULT ARRAY:"); //TODO - тут пусто!
+        error_log($paymentLogic->getPaymentSchedule($monthCount));
+        foreach($resultArray as $result) {
+            error_log($result);
+        }
         return $paymentLogic->getPaymentSchedule($monthCount); //это массив
+
     }
 
 
@@ -126,33 +130,25 @@ class MessagesBorrow {
     ];
 
     public function getSumAndScheduleMessage($sum, $monthCount){
-        $datesArray = $this->getPaymentSchedule($monthCount);
-        $resultArray = [];
-        $resultMsg = "Ты запросил $sum руб. на $monthCount мес. Твой график платежей будет следующим:
 
-5 января 2016 – 1600 руб.
+        $paymentLogic = new PaymentLogic();
+        $datesArray = $paymentLogic->getPaymentSchedule($monthCount);
+        $monthlyPayment = $paymentLogic->getPaymentMonthlyInq($sum,$monthCount,$this->getPercent());
 
-5 февраля 2016 – 1600 руб.
+        $msgCommon = "Ты запросил $sum руб. на $monthCount мес. Твой график платежей будет следующим:";
+        $msgAdditional="";
 
-5 марта 2016 – 1600 руб.
-        ";
 
-        $i=0;
         $percent = $this->getPercent();
+        error_log("PERCENTAGE: $percent");
+
+
         foreach ($datesArray as $date) {
-            error_log("DATE: $date");
-
-            $resultArray[$i] = $date."   ".$this->calcMonthlyPayment($sum,$monthCount,$percent);
-            //$resultArray[$i] = $date;
-            error_log("RESULTARRAY $i : $resultArray[$i]");
-            $i++;
+            $msgAdditional = $msgAdditional."$date  : ".round($monthlyPayment)." руб. \n";
         }
 
-        foreach ($resultArray as $line) {
-            $resultMsg.$line."\n";
-        }
 
-        return $resultMsg;
+        return $msgCommon.$msgAdditional;
 
     }
 

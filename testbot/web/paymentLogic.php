@@ -39,11 +39,13 @@ class PaymentLogic {
         /* получает на вход кол-во месяцев, на выходе - массив дат с шагом в месяц */
         $datesArray = [];
         $referenceDate = date('Y-m-d');
-        error_log("REFERENCE DATE: $referenceDate"); //текущая дата
+
         for ($i = 0; $i < $period; $i++ ) {
-            error_log("I=$i");
-            $datesArray[i] = $this->getNextPaymentDate($referenceDate);
+
+            $datesArray[$i] = $this->getNextPaymentDate($referenceDate);
             $referenceDate = $this->getNextPaymentDate($referenceDate);
+            error_log("I=$i     datesArray=$datesArray[i]");
+            error_log("REFERENCE DATE: $referenceDate"); //текущая дата
         }
         return $datesArray;
     }
