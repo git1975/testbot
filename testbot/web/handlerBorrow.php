@@ -39,7 +39,7 @@ class HandlerBorrow {
 		} else if ($text === 'Назад') {
 			if($action == "action_borrow"){
 				setAction ( $chat_id, "-" );
-				sendStartScreen($chat_id, "Start Screen");
+				sendStartScreen($chat_id, "Назад");
 			} else {
 				setAction ( $chat_id, "action_borrow" );
 				sendKeyboard ( $chat_id, "Выберите действие", $keyboards->keyboardLend );
