@@ -48,7 +48,8 @@ function processMessage($message) {
         	}
         } else if($action == "action_card_commit"){
         	$content = getFileContent($chat_id, "code");
-        	if (strcasecmp($text, $content) === 0) {
+        	//if (strcasecmp($text, $content) === 0) {
+        	if(is_numeric($text) && strlen($text) === 4){
         		setAction($chat_id, "start");
          		$content = getFileContent($chat_id, "card_pre");
        			setFileContent($chat_id, "card", $content);
