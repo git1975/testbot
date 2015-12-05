@@ -32,8 +32,8 @@ class PaymentLogic {
         $time = strtotime($referenceDate);
         $newDate = date("Y-m-d", strtotime("+1 month", $time));
 
-        error_log("TIME: $time");
-        error_log("NEWDATE: $newDate");
+        //error_log("TIME: $time");
+        //error_log("NEWDATE: $newDate");
 
 
 
