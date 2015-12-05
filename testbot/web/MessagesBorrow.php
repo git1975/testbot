@@ -31,7 +31,8 @@ class MessagesBorrow {
     private function getPaymentSchedule($monthCount) {
         $paymentLogic = new PaymentLogic();
         $resultArray[] = $paymentLogic->getPaymentSchedule($monthCount);
-        error_log("RESULT ARRAY:");
+        error_log("RESULT ARRAY:"); //TODO - тут пусто!
+        error_log($paymentLogic->getPaymentSchedule($monthCount));
         foreach($resultArray as $result) {
             error_log($result);
         }
