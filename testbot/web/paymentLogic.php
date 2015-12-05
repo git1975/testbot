@@ -47,5 +47,6 @@ class PaymentLogic {
             error_log("REFERENCE DATE: $referenceDate"); //текущая дата
         }
         return $datesArray;
+        //test
     }
 }
