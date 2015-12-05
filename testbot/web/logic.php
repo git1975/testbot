@@ -51,7 +51,13 @@ function processMessage($message) {
         		setAction($chat_id, "start");
          		$content = getFileContent($chat_id, "card_pre");
        			setFileContent($chat_id, "card", $content);
-        		sendStartScreen($chat_id, $msgStart->linkCardMsg['registrationSuccessMsg']);
+       			if($content[0] === "4"){
+        			sendStartScreen($chat_id, $msgStart->linkCardMsg['registrationSuccessMsg']);
+       			} else if($content[0] === "5"){
+        			sendStartScreen($chat_id, $msgStart->linkCardMsg['registrationSuccessMsg2']);
+       			} else {
+        			sendStartScreen($chat_id, $msgStart->linkCardMsg['registrationSuccessMsg3']);
+       			}
         	} else {
         		sendMsg($chat_id, "Код неверный");
         	}
