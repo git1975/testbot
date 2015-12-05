@@ -30,6 +30,7 @@ class HandlerLend {
 			sendMsg($chat_id, $msgs->infoMsg[0]);
 			sendMsg($chat_id, $msgs->infoMsg[1]);
 			sendMsg($chat_id, $msgs->infoMsg[2]);
+            sendMsg($chat_id, $msgs->infoMsg[3]);
 			sendKeyboard ( $chat_id, "Выберите действие", $keyboards->keyboardLend );
 			return;
 		} else if ($text === 'Аналитика') {
@@ -42,7 +43,8 @@ class HandlerLend {
 
 			sendMsg($chat_id, $msgs->infoMsg[0]);
 			sendMsg($chat_id, $msgs->infoMsg[1]);
-			sendKeyboard ( $chat_id, $msgs->infoMsg[2], $keyboards->keyboardBack );
+            sendMsg($chat_id, $msgs->infoMsg[2]);
+			sendKeyboard ( $chat_id, $msgs->infoMsg[3], $keyboards->keyboardBack );
 			return;
 		} else if ($text === 'Выданные займы') {
 			setAction ( $chat_id, "action_lend_info" );

@@ -159,9 +159,9 @@ class MessagesBorrow {
         ];
 
         foreach ($datesArray as $date) {
-            $dateFormatted = DateTime::format("j F Y");
+            //$dateFormatted = DateTime::format("j F Y");
             //$dateFormattedRus = strtr( $english_month, $trans);
-            error_log("DATE FORMATTED: $dateFormatted");
+            //error_log("DATE FORMATTED: $dateFormatted");
             $msgAdditional = $msgAdditional."$date  : ".round($monthlyPayment)." руб. \n";
         }
 

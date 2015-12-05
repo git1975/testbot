@@ -115,6 +115,7 @@ function processMessage($message) {
             sendMsg($chat_id, $msg->launchMsg[0]);
         	sendMsg($chat_id, $msg->launchMsg[1]);
         	sendMsg($chat_id, $msg->launchMsg[2]);
+            sendMsg($chat_id, $msg->launchMsg[3]);
 
         	sendKeyboard($chat_id, $msgRisk, $keyboards->keyboardBorrow);
         } else if ($text === 'Дать в долг') {
@@ -122,7 +123,8 @@ function processMessage($message) {
         	$msg = new MessagesLend ();
         	sendMsg($chat_id, $msg->launchMsg [0]);
             sendMsg($chat_id, $msg->launchMsg [1]);
-            sendKeyboard ( $chat_id, $msg->launchMsg [2], $keyboards->keyboardLend );
+            sendMsg($chat_id, $msg->launchMsg [2]);
+            sendKeyboard ( $chat_id, $msg->launchMsg [3], $keyboards->keyboardLend );
         } else if (strcasecmp($text, "start") === 0 || strcasecmp($action, "start") === 0) {
         	sendStartScreen($chat_id, "");
         } else if (strcasecmp($text, "lend") === 0) {
