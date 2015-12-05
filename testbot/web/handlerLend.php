@@ -52,13 +52,14 @@ class HandlerLend {
 				$line = fgets($file);
 				$pieces = explode(";", $line);
 				if(strlen($pieces[1]) > 0){
-					$s = $s.$pieces[3]." на сумму ".$pieces[1]." руб. на срок ".$pieces[2]." мес.\r\n";
+					//$s = $s.$pieces[3]." на сумму ".$pieces[1]." руб. на срок ".$pieces[2]." мес.\r\n";
+					$s = $s.$pieces[3]." на сумму 500 руб. на срок ".$pieces[2]." мес.\r\n";
 				}
 			}
 			fclose($file);
 			
 			$s = $s."...\r\n";
-			$s = $s."01.12.2015 на сумму 300 руб. на срок 3 мес.\r\n";
+			$s = $s."01.12.2015 на сумму 1000 руб. на срок 3 мес.\r\n";
 			
 			sendKeyboard ( $chat_id, $s, $keyboards->keyboardBack );
 			return;
@@ -69,7 +70,8 @@ class HandlerLend {
 				$line = fgets($file);
 				$pieces = explode(";", $line);
 				if($pieces[1] !== ""){
-					$sum = $sum + intval($pieces[1]);
+					//$sum = $sum + intval($pieces[1]);
+					$sum = $sum + 500;
 				}
 			}
 			fclose($file);
