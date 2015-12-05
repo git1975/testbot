@@ -71,12 +71,12 @@ class HandlerLend {
 				$pieces = explode(";", $line);
 				if($pieces[1] !== ""){
 					//$sum = $sum + intval($pieces[1]);
-					$sum = $sum + 500;
+					$sum = $sum + 66;
 				}
 			}
 			fclose($file);
 			
-			sendKeyboard ( $chat_id, "Всего Вам должны $sum руб.", $keyboards->keyboardBack );
+			sendKeyboard ( $chat_id, "В следующем месяце вы плучите $sum руб.", $keyboards->keyboardBack );
 			return;
 		} else if ($text == 'Подать на взыскание') {
 			$file = fopen("borrowers.txt", "r");
